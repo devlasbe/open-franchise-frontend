@@ -9,6 +9,9 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        noto: ["var(--noto)"],
+      },
       fontSize: {
         h1: [
           "32px",
