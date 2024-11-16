@@ -4,16 +4,15 @@ import {
   AlertDialogCancel,
   AlertDialogContent,
   AlertDialogFooter,
+  AlertDialogTitle,
   AlertDialogTrigger,
 } from "../../ui/alert-dialog";
 import { Category } from "@/types/apiTypes";
-import Link from "next/link";
 import { SearchIcon } from "lucide-react";
 import SearchInput from "@/components/SearchInput";
 
 export default function MobileMenu({ categoryList }: { categoryList: Category[] }) {
   const largeList = Array.from(new Set(categoryList.map((item) => item.indutyLclasNm)));
-
   return (
     <nav className="flex gap-4 sm:hidden items-center">
       <AlertDialog>
@@ -21,6 +20,7 @@ export default function MobileMenu({ categoryList }: { categoryList: Category[] 
           <SearchIcon width={25} height={25} />
         </AlertDialogTrigger>
         <AlertDialogContent className="overflow-auto h-full border-none">
+          <AlertDialogTitle />
           <h2 className="text-center text-h3">브랜드 이름으로 검색</h2>
           <div className="py-50">
             <SearchInput />
@@ -35,6 +35,7 @@ export default function MobileMenu({ categoryList }: { categoryList: Category[] 
           <HamburgerMenuIcon width={28} height={28} />
         </AlertDialogTrigger>
         <AlertDialogContent className="overflow-auto h-full border-none">
+          <AlertDialogTitle />
           {largeList.map((item) => {
             const subList = categoryList
               .filter((data) => data.indutyLclasNm === item)
@@ -47,12 +48,12 @@ export default function MobileMenu({ categoryList }: { categoryList: Category[] 
                 <div className="grid grid-cols-3 gap-1">
                   {subList.map((sub) => (
                     <AlertDialogCancel asChild key={`mobile-sub-menu-${sub.indutyMlsfcNm}`} className="m-0">
-                      <Link
+                      <a
                         href={`/search?category=${sub.indutyMlsfcNm}`}
                         className="py-1 border rounded-md text-center text-caption1 sm:text-body text-ellipsis line-clamp-1"
                       >
                         {sub.indutyMlsfcNm}
-                      </Link>
+                      </a>
                     </AlertDialogCancel>
                   ))}
                 </div>
