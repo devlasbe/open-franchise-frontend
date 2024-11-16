@@ -1,4 +1,9 @@
 /** @type {import('next').NextConfig} */
+const apiDev = process.env.API_URL_DEV;
+const apiOp = process.env.API_URL_OP;
+const isDev = process.env.NODE_ENV === "development";
+const defaultUrl = isDev ? apiDev : apiOp;
+
 const nextConfig = {
   reactStrictMode: true,
   webpack: (config) => {
@@ -8,6 +13,14 @@ const nextConfig = {
     });
 
     return config;
+  },
+  async rewrites() {
+    return [
+      {
+        source: "/franchise/:path*",
+        destination: `${defaultUrl}/:path*`,
+      },
+    ];
   },
 };
 
