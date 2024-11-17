@@ -16,6 +16,10 @@ export interface Statistic {
   corpNm: string;
   /** 기준년도 */
   yr: string;
+  /** 업종대분류명 */
+  indutyLclasNm: string;
+  /** 업종중분류명 */
+  indutyMlsfcNm: string;
   /** 가맹점수 */
   frcsCnt: number;
   /** 신규가맹점등록수 */
@@ -39,6 +43,36 @@ export interface GetStatisticListRes {
   request: string;
   /** payload 배열의 length */
   count: number;
+}
+
+export interface GetStatisticByFilterReq {
+  /**
+   * 페이지 번호
+   * @example 1
+   */
+  pageNo: number;
+  /**
+   * 가져올 데이터 수
+   * @example 10
+   */
+  pageSize: number;
+  /** 정렬할 컬럼명 */
+  orderCol?: string;
+  /**
+   * 정렬 방법
+   * @example "asc | desc"
+   */
+  orderSort?: string;
+  /**
+   * 연도
+   * @example "2023"
+   */
+  yr: string;
+  /**
+   * 카테고리
+   * @example "치킨"
+   */
+  category: string;
 }
 
 export interface Category {
@@ -68,6 +102,13 @@ export interface GetBrandListReq {
    * @example 10
    */
   pageSize: number;
+  /** 정렬할 컬럼명 */
+  orderCol?: string;
+  /**
+   * 정렬 방법
+   * @example "asc | desc"
+   */
+  orderSort?: string;
   /**
    * 브랜드 명
    * @example "놀부"
