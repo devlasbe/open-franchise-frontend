@@ -33,7 +33,7 @@ export default function SearchInput() {
       onBlur={handleBlur}
     >
       <input
-        className="flex flex-1 text-textbody text-neutral-500 outline-none focus:ring-0"
+        className="flex flex-1 bg-transparent text-textbody text-neutral-500 outline-none focus:ring-0"
         type="text"
         onChange={debouncedChange}
         onKeyDown={(e) => {
@@ -44,7 +44,7 @@ export default function SearchInput() {
         <SearchIcon className="stroke-neutral-400" width={20} height={20} />
       </Link>
       {isFocus && !!brandList.length && (
-        <div className="z-20 absolute top-12 left-0 flex flex-col p-4 w-full rounded-md shadow-md bg-white border">
+        <div className="z-30 absolute top-12 left-0 flex flex-col p-4 w-full rounded-md shadow-md bg-white border">
           {brandList.map((item) => (
             <Link
               key={`search-input-${item.brandNm}`}
