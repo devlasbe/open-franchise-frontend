@@ -21,7 +21,9 @@ export default async function BrandPage({ params: { name } }: BrandPageParams) {
         <FetchBoundary>
           <BrandStartup name={name} />
         </FetchBoundary>
-        <BrandStatistic name={name} />
+        <FetchBoundary>
+          <BrandStatistic name={name} />
+        </FetchBoundary>
       </div>
     </div>
   );

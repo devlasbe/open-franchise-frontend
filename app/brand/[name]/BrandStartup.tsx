@@ -27,13 +27,15 @@ export default async function BrandStartup({ name }: { name: string }) {
           </div>
           <div className="flex flex-1 flex-col sm:flex-row">
             {Object.keys(startupLayout).map((key) => {
-              if (!startupData || !(key in startupData)) return;
               return (
                 <div
                   key={`brand-startup-cell-${key}`}
                   className="flex flex-1 justify-end sm:justify-center py-1 text-body sm:text-textbody text-nowrap"
                 >
-                  {UnitUtil.formatNumberToKorean(+startupData[key as keyof Startup])}원
+                  {!startupData || !(key in startupData)
+                    ? "-"
+                    : UnitUtil.formatNumberToKorean(+startupData[key as keyof Startup])}
+                  원
                 </div>
               );
             })}
