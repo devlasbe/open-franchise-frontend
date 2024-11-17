@@ -1,4 +1,4 @@
-import myFetch, { clientFetch } from "@/lib/myFetch";
+import { clientFetch } from "@/lib/myFetch";
 import { GetBrandListReq, GetBrandListRes } from "@/types/apiTypes";
 
 export class BrandService {
