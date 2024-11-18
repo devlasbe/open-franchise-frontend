@@ -33,8 +33,9 @@ export default function SearchInput() {
       onBlur={handleBlur}
     >
       <input
-        className="flex flex-1 bg-transparent text-textbody text-neutral-500 outline-none focus:ring-0"
+        className="flex flex-1 bg-transparent text-textbody text-neutral-500 outline-none focus:ring-0 placeholder:text-center"
         type="text"
+        placeholder="검색어를 입력해 보세요"
         onChange={debouncedChange}
         onKeyDown={(e) => {
           if (e.key === "Enter" && name) router.push(`/search?name=${name}`);
