@@ -1,12 +1,12 @@
 "use client";
 
 import { SearchIcon } from "lucide-react";
-import Link from "next/link";
 import { useMemo, useState } from "react";
 import _ from "lodash";
 import { Brand } from "@/types/apiTypes";
 import { BrandService } from "@/services/brand";
 import { useRouter } from "next/navigation";
+import { closeDialog } from "@/components/ui/alert-dialog";
 
 export default function SearchInput() {
   const [name, setName] = useState("");
@@ -23,6 +23,11 @@ export default function SearchInput() {
     setBrandList([]);
     if (response?.payload?.length) setBrandList(response.payload);
   };
+  // 경로 변경하며 모바일에서 dialog 닫는 로직 추가
+  const handleChangePath = (path: string) => {
+    router.push(path);
+    closeDialog();
+  };
   const debouncedChange = useMemo(() => _.debounce(handleChange, 500), []);
   const handleBlur = () => setTimeout(() => setIsFocus(false), 100);
 
@@ -38,22 +43,22 @@ export default function SearchInput() {
         placeholder="검색어를 입력해 보세요"
         onChange={debouncedChange}
         onKeyDown={(e) => {
-          if (e.key === "Enter" && name) router.push(`/search?name=${name}`);
+          if (e.key === "Enter" && name) handleChangePath(`/search?name=${name}`);
         }}
       />
-      <Link href={`/search?name=${name}`}>
+      <button onClick={() => handleChangePath(`/search?name=${name}`)}>
         <SearchIcon className="stroke-neutral-400" width={20} height={20} />
-      </Link>
+      </button>
       {isFocus && !!brandList.length && (
         <div className="z-30 absolute top-12 left-0 flex flex-col p-4 w-full rounded-md shadow-md bg-white border">
           {brandList.map((item) => (
-            <Link
+            <button
               key={`search-input-${item.brandNm}`}
-              href={`/brand/${item.brandNm}`}
+              onClick={() => handleChangePath(`/brand/${item.brandNm}`)}
               className="rounded-md hover:bg-neutral-100 p-2 text-neutral-500 overflow-hidden text-body text-nowrap text-ellipsis"
             >
               {item.brandNm}
-            </Link>
+            </button>
           ))}
         </div>
       )}
