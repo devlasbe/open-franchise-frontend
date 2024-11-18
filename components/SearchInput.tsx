@@ -38,9 +38,9 @@ export default function SearchInput() {
       onBlur={handleBlur}
     >
       <input
-        className="flex flex-1 bg-transparent text-textbody text-neutral-500 outline-none focus:ring-0 placeholder:text-center"
+        className="w-full bg-transparent text-textbody text-neutral-500 outline-none focus:ring-0 placeholder:text-center"
         type="text"
-        placeholder="검색어를 입력해 보세요"
+        placeholder="궁금했던 브랜드 검색"
         onChange={debouncedChange}
         onKeyDown={(e) => {
           if (e.key === "Enter" && name) handleChangePath(`/search?name=${name}`);
