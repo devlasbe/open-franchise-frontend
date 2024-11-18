@@ -38,7 +38,7 @@ export default async function Rank({ category, title }: RankProps) {
                         <p className="text-subtitle2 overflow-hidden whitespace-nowrap text-ellipsis">{item.brandNm}</p>
                         <Separator className="my-2" />
                         <div className="flex justify-between">
-                          <p className="text-caption1 text-neutral-400">면적당 매출</p>
+                          <p className="text-caption1 text-neutral-400">면적(평)당 매출</p>
                           <p className="text-caption1 text-neutral-700">
                             {UnitUtil.formatNumberToKorean(item.arUnitAvrgSlsAmt)}원
                           </p>

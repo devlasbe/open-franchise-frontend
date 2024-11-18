@@ -97,8 +97,8 @@ const statisticList: StatisticListType[] = [
         chart: { type: "bar", xAxis: "yr", color: "0", isBillion: true },
       },
       arUnitAvrgSlsAmt: {
-        title: "연도별 면적당 평균매출",
-        label: "면적당 평균매출",
+        title: "연도별 면적(평)당 평균매출",
+        label: "면적(평)당 평균매출",
         unit: "원",
         chart: { type: "bar", xAxis: "yr", color: "0", isBillion: true },
       },
