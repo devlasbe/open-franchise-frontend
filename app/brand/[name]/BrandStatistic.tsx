@@ -75,7 +75,7 @@ type LineList = {
     label: string;
     unit: string;
     chart: {
-      type: ChartTypeProps;
+      type?: ChartTypeProps;
       xAxis: string;
       color: ChartColorProps;
       isBillion?: boolean;
@@ -126,19 +126,19 @@ const statisticList: StatisticListType[] = [
         title: "계약종료수",
         label: "계약종료수",
         unit: "개",
-        chart: { type: "bar", xAxis: "yr", color: "2" },
+        chart: { xAxis: "yr", color: "2" },
       },
       ctrtCncltnCnt: {
         title: "계약해지수",
         label: "계약해지수",
         unit: "개",
-        chart: { type: "bar", xAxis: "yr", color: "2" },
+        chart: { xAxis: "yr", color: "2" },
       },
       nmChgCnt: {
         title: "명의변경수",
         label: "명의변경수",
         unit: "개",
-        chart: { type: "bar", xAxis: "yr", color: "2" },
+        chart: { xAxis: "yr", color: "2" },
       },
     },
   },
