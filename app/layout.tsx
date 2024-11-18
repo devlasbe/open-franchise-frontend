@@ -22,11 +22,11 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${notoSansKr.variable} antialiased`}>
+      <body className={`${notoSansKr.className} antialiased`}>
         <div className="flex justify-center w-full min-h-dvh">
-          <Header />
-          <main className="max-w-screen-xl w-full min-h-dvh pt-20 pb-8 px-2 sm:px-0 bg-white">{children}</main>
+          <main className="flex max-w-screen-xl w-full min-h-dvh pt-20 pb-8 px-2 xl:px-0 bg-white">{children}</main>
         </div>
+        <Header />
         <Footer />
       </body>
     </html>
