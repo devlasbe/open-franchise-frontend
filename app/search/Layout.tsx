@@ -24,6 +24,7 @@ export default function Layout() {
 
   // 초기 호출
   useEffect(() => {
+    window.scrollTo(0, 0);
     setIsLoading(true);
     BrandService.getBrandList({
       name,
@@ -59,7 +60,6 @@ export default function Layout() {
   const handleObserver = useCallback(
     (entries: IntersectionObserverEntry[]) => {
       const target = entries[0];
-      console.log(target.isIntersecting);
       if (target.isIntersecting && !isLoading) {
         getNextPage();
       }
@@ -87,7 +87,7 @@ export default function Layout() {
   return (
     <div className="flex flex-col flex-1">
       <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 sm:gap-4">
-        {dataList?.length &&
+        {!!dataList?.length &&
           dataList.map((item) => (
             <Link key={`search-${item.brandNm}`} className="hovered-button" href={`/brand/${item.brandNm}`}>
               <Card className="flex flex-col gap-3 p-4">
