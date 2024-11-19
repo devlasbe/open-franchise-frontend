@@ -152,9 +152,73 @@ export interface GetBrandListRes {
   count: number;
 }
 
+export interface Head {
+  /** 홈페이지주소 */
+  hmpgUrladr?: string;
+  /** 지역명 */
+  areaNm: string;
+  /** 가맹사업기준년도 */
+  jngBizCrtraYr: string;
+  /** 가맹본부관리번호 */
+  jnghdqrtrsMnno: string;
+  /** 가맹본부 상호명 */
+  jnghdqrtrsConmNm: string;
+  /** 사업자등록번호 */
+  brno: string;
+  /** 법인등록번호 */
+  crno?: string;
+  /** 개인법인구분코드 (10: 개인, 11: 법인) */
+  indvdlCorpSeCd: string;
+  /** 사업자등록일자 */
+  bzmnRgsDate: string;
+  /** 법인등기일자 */
+  corpRgDate: string;
+  /** 가맹본부대표전화번호 */
+  jnghdqrtrsRprsTelno?: string;
+  /** 가맹본부대표팩스번호 */
+  jnghdqrtrsRprsFxno?: string;
+  /** 가맹본부대표자명 */
+  jnghdqrtrsRprsvNm: string;
+  /** 가맹본부구우편번호 */
+  jnghdqrtrsOzip?: string;
+  /** 소재지주소 */
+  lctnAddr?: string;
+  /** 소재지상세주소 */
+  lctnDaddr?: string;
+  /** 브랜드수 */
+  brandCnt: number;
+  /** 계열회사수 */
+  affltsCnt: number;
+  /** 가맹기관명 */
+  jngInstNm: string;
+  /** 기업규모명 */
+  entScaleNm: string;
+}
+
+export interface BrandRes {
+  /** 브랜드 데이터 */
+  brand: Brand;
+  /** 본사 데이터 */
+  head: Head;
+}
+
 export interface GetBrandRes {
   /** 응답 데이터 */
-  payload: Brand;
+  payload: BrandRes;
+  /** 호출된 URI */
+  request: string;
+}
+
+export interface GetHeadReq {
+  /** 가맹사업기준년도 */
+  jngBizCrtraYr: string;
+  /** 가맹본부관리번호 */
+  jnghdqrtrsMnno: string;
+}
+
+export interface GetHeadRes {
+  /** 응답 데이터 */
+  payload: Head;
   /** 호출된 URI */
   request: string;
 }
@@ -190,8 +254,6 @@ export interface GetStartupRes {
 }
 
 export interface GetInteriorReq {
-  /** 가맹사업기준년도 */
-  jngBizCrtraYr: string;
   /** 브랜드관리번호 */
   brandMnno: string;
 }
@@ -222,63 +284,6 @@ export interface Interior {
 export interface GetInteriorRes {
   /** 응답 데이터 */
   payload: Interior;
-  /** 호출된 URI */
-  request: string;
-}
-
-export interface GetHeadReq {
-  /** 가맹사업기준년도 */
-  jngBizCrtraYr: string;
-  /** 가맹본부관리번호 */
-  jnghdqrtrsMnno: string;
-}
-
-export interface Head {
-  /** 홈페이지주소 */
-  hmpgUrladr: string;
-  /** 지역명 */
-  areaNm: string;
-  /** 가맹사업기준년도 */
-  jngBizCrtraYr: string;
-  /** 가맹본부관리번호 */
-  jnghdqrtrsMnno: string;
-  /** 가맹본부 상호명 */
-  jnghdqrtrsConmNm: string;
-  /** 사업자등록번호 */
-  brno: string;
-  /** 법인등록번호 */
-  crno: string;
-  /** 개인법인구분코드 (10: 개인, 11: 법인) */
-  indvdlCorpSeCd: string;
-  /** 사업자등록일자 */
-  bzmnRgsDate: string;
-  /** 법인등기일자 */
-  corpRgDate: string;
-  /** 가맹본부대표전화번호 */
-  jnghdqrtrsRprsTelno: string;
-  /** 가맹본부대표팩스번호 */
-  jnghdqrtrsRprsFxno: string;
-  /** 가맹본부대표자명 */
-  jnghdqrtrsRprsvNm: string;
-  /** 가맹본부구우편번호 */
-  jnghdqrtrsOzip: string;
-  /** 소재지주소 */
-  lctnAddr: string;
-  /** 소재지상세주소 */
-  lctnDaddr: string;
-  /** 브랜드수 */
-  brandCnt: number;
-  /** 계열회사수 */
-  affltsCnt: number;
-  /** 가맹기관명 */
-  jngInstNm: string;
-  /** 기업규모명 */
-  entScaleNm: string;
-}
-
-export interface GetHeadRes {
-  /** 응답 데이터 */
-  payload: Head;
   /** 호출된 URI */
   request: string;
 }

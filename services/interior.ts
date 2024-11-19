@@ -3,8 +3,11 @@ import { GetInteriorReq, GetInteriorRes } from "@/types/apiTypes";
 import { QueryParamsUtil } from "@/utils/queryParams";
 
 export class InteriorService {
-  static async getInterior(params: GetInteriorReq) {
-    const dataList = await myFetch<GetInteriorRes>(QueryParamsUtil.convert("heads", params));
+  static async getInterior(brandMnno: string) {
+    const params: GetInteriorReq = {
+      brandMnno,
+    };
+    const dataList = await myFetch<GetInteriorRes>(QueryParamsUtil.convert("interiors", params));
     return dataList;
   }
 }

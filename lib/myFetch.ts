@@ -7,7 +7,10 @@ const myFetch = async <T>(input: RequestInfo | URL, init?: RequestInit) => {
   const endPoint = `${defaultUrl}/${input}`;
   const response = await fetch(endPoint, init);
   const data: T = await response.json();
-  if (!response.ok) throw new Error(JSON.stringify(data));
+  if (!response.ok) {
+    const error = data as { response: { message: string } };
+    throw new Error(error?.response?.message);
+  }
   return data;
 };
 
@@ -18,7 +21,10 @@ export const clientFetch = async <T>(input: RequestInfo | URL, init?: RequestIni
   try {
     const response = await fetch(endPoint, init);
     const data: T = await response.json();
-    if (!response.ok) throw new Error(JSON.stringify(data));
+    if (!response.ok) {
+      const error = data as { response: { message: string } };
+      throw new Error(error?.response?.message);
+    }
     return data;
   } catch (error) {
     throw error;

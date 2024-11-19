@@ -1,15 +1,14 @@
 import Chart, { ChartColorProps, ChartTypeProps } from "@/components/chart/Chart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { StatisticService } from "@/services/statistic";
+import Summary from "@/components/ui/summary";
 import { Statistic } from "@/types/apiTypes";
 import { UnitUtil } from "@/utils/unit";
 
-export default async function BrandStatistic({ name }: { name: string }) {
-  const data = await StatisticService.getStatistic(name);
-  const brandData = data?.payload?.length ? data.payload[0] : null;
+export default async function BrandStatistic({ statisticDataList }: { statisticDataList: Statistic[] }) {
+  const brandData = statisticDataList?.length ? statisticDataList[0] : null;
   return (
     <>
-      {statisticList.map((item, idx) => (
+      {statisticLayoutList.map((item, idx) => (
         <div key={`brand-statistic-${idx}`} className="flex flex-1 flex-col sm:flex-row gap-4">
           {Object.keys(item.line).map((key, idx2) => {
             const obj = item.line[key];
@@ -22,7 +21,7 @@ export default async function BrandStatistic({ name }: { name: string }) {
                 <CardContent className="flex flex-col gap-8 pt-4">
                   <Chart
                     type={obj.chart.type}
-                    dataList={data?.payload}
+                    dataList={statisticDataList}
                     xAxis={obj.chart.xAxis}
                     isBillion={obj.chart.isBillion}
                     config={{
@@ -32,33 +31,27 @@ export default async function BrandStatistic({ name }: { name: string }) {
                       },
                     }}
                   />
-                  <div className="flex flex-row sm:flex-col p-4 rounded-lg bg-neutral-100">
-                    <div className="flex flex-1 flex-col sm:flex-row">
-                      {data?.payload?.map((item) => (
-                        <div
-                          key={`brand-statistic-header-${obj.title}-${item.yr}`}
-                          className="flex flex-1 justify-start sm:justify-center py-1 text-body sm:text-body text-nowrap text-neutral-500"
-                        >
+                  <Summary.Container>
+                    <Summary.Wrapper>
+                      {statisticDataList.map((item) => (
+                        <Summary.Header key={`brand-statistic-header-${obj.title}-${item.yr}`}>
                           {item.yr}년
-                        </div>
+                        </Summary.Header>
                       ))}
-                    </div>
-                    <div className="flex flex-1 flex-col sm:flex-row">
-                      {data?.payload?.map((item) => {
+                    </Summary.Wrapper>
+                    <Summary.Wrapper>
+                      {statisticDataList.map((item) => {
                         return (
-                          <div
-                            key={`brand-statistic-cell-${obj.title}-${item.yr}`}
-                            className="flex flex-1 justify-end sm:justify-center py-1 text-body sm:text-textbody text-nowrap"
-                          >
+                          <Summary.Content key={`brand-statistic-cell-${obj.title}-${item.yr}`}>
                             {obj.chart.isBillion
                               ? UnitUtil.formatNumberToKorean(+item[key as keyof Statistic])
                               : (+item[key as keyof Statistic]).toLocaleString()}
                             {obj.unit}
-                          </div>
+                          </Summary.Content>
                         );
                       })}
-                    </div>
-                  </div>
+                    </Summary.Wrapper>
+                  </Summary.Container>
                 </CardContent>
               </Card>
             );
@@ -83,21 +76,21 @@ type LineList = {
   };
 };
 
-type StatisticListType = {
+type StatisticLayoutListType = {
   line: LineList;
 };
 
-const statisticList: StatisticListType[] = [
+const statisticLayoutList: StatisticLayoutListType[] = [
   {
     line: {
       avrgSlsAmt: {
-        title: "연도별 평균매출",
+        title: "📋 평균매출",
         label: "평균매출",
         unit: "원",
         chart: { type: "bar", xAxis: "yr", color: "0", isBillion: true },
       },
       arUnitAvrgSlsAmt: {
-        title: "연도별 면적(평)당 평균매출",
+        title: "📐 면적(평)당 평균매출",
         label: "면적(평)당 평균매출",
         unit: "원",
         chart: { type: "bar", xAxis: "yr", color: "0", isBillion: true },
@@ -107,13 +100,13 @@ const statisticList: StatisticListType[] = [
   {
     line: {
       frcsCnt: {
-        title: "가맹점 수",
+        title: "🏠 가맹점 수",
         label: "가맹점 수",
         unit: "개",
         chart: { type: "bar", xAxis: "yr", color: "1" },
       },
       newFrcsRgsCnt: {
-        title: "신규 가맹점 수",
+        title: "🎉 신규 가맹점 수",
         label: "신규 가맹점 수",
         unit: "개",
         chart: { type: "bar", xAxis: "yr", color: "1" },
@@ -123,19 +116,19 @@ const statisticList: StatisticListType[] = [
   {
     line: {
       ctrtEndCnt: {
-        title: "계약종료수",
+        title: "🎬 계약종료수",
         label: "계약종료수",
         unit: "개",
         chart: { xAxis: "yr", color: "2" },
       },
       ctrtCncltnCnt: {
-        title: "계약해지수",
+        title: "✂️ 계약해지수",
         label: "계약해지수",
         unit: "개",
         chart: { xAxis: "yr", color: "2" },
       },
       nmChgCnt: {
-        title: "명의변경수",
+        title: "🔄 명의변경수",
         label: "명의변경수",
         unit: "개",
         chart: { xAxis: "yr", color: "2" },

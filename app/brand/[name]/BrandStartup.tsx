@@ -1,4 +1,5 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import Summary from "@/components/ui/summary";
 import { StatisticService } from "@/services/statistic";
 import { Startup } from "@/types/apiTypes";
 import { UnitUtil } from "@/utils/unit";
@@ -9,38 +10,28 @@ export default async function BrandStartup({ name }: { name: string }) {
   return (
     <Card>
       <CardHeader>
-        <CardTitle>창업 비용</CardTitle>
+        <CardTitle>💵 창업 비용</CardTitle>
       </CardHeader>
       <CardContent>
-        <div className="flex flex-row sm:flex-col p-4 rounded-lg bg-neutral-100">
-          <div className="flex flex-1 flex-col sm:flex-row">
+        <Summary.Container>
+          <Summary.Wrapper>
             {Object.values(startupLayout).map((item) => {
-              return (
-                <div
-                  key={`brand-startup-header-${item}`}
-                  className="flex flex-1 justify-start sm:justify-center py-1 font-normal text-body sm:text-body text-nowrap text-neutral-500"
-                >
-                  {item}
-                </div>
-              );
+              return <Summary.Header key={`brand-startup-header-${item + ""}`}>{item}</Summary.Header>;
             })}
-          </div>
-          <div className="flex flex-1 flex-col sm:flex-row">
+          </Summary.Wrapper>
+          <Summary.Wrapper>
             {Object.keys(startupLayout).map((key) => {
               return (
-                <div
-                  key={`brand-startup-cell-${key}`}
-                  className="flex flex-1 justify-end sm:justify-center py-1 text-body sm:text-textbody text-nowrap"
-                >
+                <Summary.Content key={`brand-startup-cell-${key}`}>
                   {!startupData || !(key in startupData)
                     ? "-"
                     : UnitUtil.formatNumberToKorean(+startupData[key as keyof Startup])}
                   원
-                </div>
+                </Summary.Content>
               );
             })}
-          </div>
-        </div>
+          </Summary.Wrapper>
+        </Summary.Container>
       </CardContent>
     </Card>
   );
