@@ -36,7 +36,7 @@ export default async function BrandStatistic({ name }: { name: string }) {
                     <div className="flex flex-1 flex-col sm:flex-row">
                       {data?.payload?.map((item) => (
                         <div
-                          key={`brand-startup-header-${item}`}
+                          key={`brand-statistic-header-${obj.title}-${item.yr}`}
                           className="flex flex-1 justify-start sm:justify-center py-1 text-body sm:text-body text-nowrap text-neutral-500"
                         >
                           {item.yr}년
@@ -47,7 +47,7 @@ export default async function BrandStatistic({ name }: { name: string }) {
                       {data?.payload?.map((item) => {
                         return (
                           <div
-                            key={`brand-startup-cell-${key}`}
+                            key={`brand-statistic-cell-${obj.title}-${item.yr}`}
                             className="flex flex-1 justify-end sm:justify-center py-1 text-body sm:text-textbody text-nowrap"
                           >
                             {obj.chart.isBillion
