@@ -19,7 +19,6 @@ export default async function BrandPage({ params: { name } }: BrandPageParams) {
     const headData = brandResponse?.payload?.head;
     const statisticDataList = (await StatisticService.getStatistic(name)).payload;
     const brandData = statisticDataList?.length ? statisticDataList[0] : null;
-
     return (
       <div className="flex-1">
         <div className="flex flex-col flex-1 gap-4 pt-12">

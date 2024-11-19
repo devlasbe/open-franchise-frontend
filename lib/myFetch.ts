@@ -9,6 +9,7 @@ const myFetch = async <T>(input: RequestInfo | URL, init?: RequestInit) => {
   const data: T = await response.json();
   if (!response.ok) {
     const error = data as { response: { message: string } };
+    console.error(endPoint, error);
     throw new Error(error?.response?.message);
   }
   return data;
@@ -23,6 +24,7 @@ export const clientFetch = async <T>(input: RequestInfo | URL, init?: RequestIni
     const data: T = await response.json();
     if (!response.ok) {
       const error = data as { response: { message: string } };
+      console.error(endPoint, error);
       throw new Error(error?.response?.message);
     }
     return data;
