@@ -9,6 +9,7 @@ const myFetch = async <T>(input: RequestInfo | URL, init?: RequestInit) => {
     const response = await fetch(endPoint, init);
     const data: T = await response.json();
     if (!response.ok) {
+      console.error(endPoint, data);
       throw new Error("API 응답 처리 실패");
     }
     return data;
@@ -25,6 +26,7 @@ export const clientFetch = async <T>(input: RequestInfo | URL, init?: RequestIni
     const response = await fetch(endPoint, init);
     const data: T = await response.json();
     if (!response.ok) {
+      console.error(endPoint, data);
       throw new Error("API 응답 처리 실패");
     }
     return data;

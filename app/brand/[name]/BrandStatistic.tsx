@@ -4,7 +4,7 @@ import Summary from "@/components/ui/summary";
 import { Statistic } from "@/types/apiTypes";
 import { UnitUtil } from "@/utils/unit";
 
-export default async function BrandStatistic({ statisticDataList }: { statisticDataList: Statistic[] }) {
+export default function BrandStatistic({ statisticDataList }: { statisticDataList: Statistic[] }) {
   const brandData = statisticDataList?.length ? statisticDataList[0] : null;
   return (
     <>

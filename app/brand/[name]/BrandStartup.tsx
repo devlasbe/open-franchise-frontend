@@ -3,10 +3,13 @@ import Summary from "@/components/ui/summary";
 import { StatisticService } from "@/services/statistic";
 import { Startup } from "@/types/apiTypes";
 import { UnitUtil } from "@/utils/unit";
+import { useEffect, useState } from "react";
 
-export default async function BrandStartup({ name }: { name: string }) {
-  const startup = await StatisticService.getStartup(name);
-  const startupData = startup?.payload;
+export default function BrandStartup({ name }: { name: string }) {
+  const [startupData, setStartupData] = useState<Startup>();
+  useEffect(() => {
+    StatisticService.getStartup(name).then((res) => setStartupData(res?.payload));
+  }, [name]);
   return (
     <Card>
       <CardHeader>

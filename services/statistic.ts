@@ -1,9 +1,9 @@
-import myFetch from "@/lib/myFetch";
+import myFetch, { clientFetch } from "@/lib/myFetch";
 import { GetStartupRes, GetStatisticByFilterReq, GetStatisticListRes } from "@/types/apiTypes";
 
 export class StatisticService {
   static async getStatistic(name: string) {
-    const dataList = await myFetch<GetStatisticListRes>(`statistic/${name}`);
+    const dataList = await clientFetch<GetStatisticListRes>(`statistic/${name}`);
     return dataList;
   }
   static async getStatisticByFilter(params: GetStatisticByFilterReq) {

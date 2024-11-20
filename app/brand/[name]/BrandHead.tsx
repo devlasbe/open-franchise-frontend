@@ -3,7 +3,7 @@ import Summary from "@/components/ui/summary";
 import { Head } from "@/types/apiTypes";
 import { Link1Icon } from "@radix-ui/react-icons";
 
-export default async function BrandHead({ headData }: { headData: Head }) {
+export default function BrandHead({ headData }: { headData: Head }) {
   return (
     <Card>
       <CardHeader>

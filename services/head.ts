@@ -1,4 +1,4 @@
-import myFetch from "@/lib/myFetch";
+import { clientFetch } from "@/lib/myFetch";
 import { GetHeadReq, GetHeadRes } from "@/types/apiTypes";
 import { QueryParamsUtil } from "@/utils/queryParams";
 
@@ -10,7 +10,7 @@ export class HeadService {
       jnghdqrtrsMnno,
       jngBizCrtraYr: year,
     };
-    const dataList = await myFetch<GetHeadRes>(QueryParamsUtil.convert("heads", params));
+    const dataList = await clientFetch<GetHeadRes>(QueryParamsUtil.convert("heads", params));
     return dataList;
   }
 }
