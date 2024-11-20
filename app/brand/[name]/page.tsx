@@ -27,18 +27,26 @@ export default async function BrandPage({ params: { name } }: BrandPageParams) {
               <BrandHead headData={headData} />
             </FetchBoundary>
           )}
-          <FetchBoundary>
-            <BrandHeader data={brandData} />
-          </FetchBoundary>
-          <FetchBoundary>
-            <BrandStartup name={name} />
-          </FetchBoundary>
-          <FetchBoundary>
-            <BrandInterior brandMnno={brandResponse?.payload?.brand?.brandMnno} />
-          </FetchBoundary>
-          <FetchBoundary>
-            <BrandStatistic statisticDataList={statisticDataList} />
-          </FetchBoundary>
+          {!!brandData && (
+            <FetchBoundary>
+              <BrandHeader data={brandData} />
+            </FetchBoundary>
+          )}
+          {!!name && (
+            <FetchBoundary>
+              <BrandStartup name={name} />
+            </FetchBoundary>
+          )}
+          {!!brandResponse?.payload?.brand?.brandMnno && (
+            <FetchBoundary>
+              <BrandInterior brandMnno={brandResponse?.payload?.brand?.brandMnno} />
+            </FetchBoundary>
+          )}
+          {statisticDataList && (
+            <FetchBoundary>
+              <BrandStatistic statisticDataList={statisticDataList} />
+            </FetchBoundary>
+          )}
         </div>
       </div>
     );
