@@ -3,13 +3,20 @@ const apiOp = process.env.NEXT_PUBLIC_API_URL_OP;
 const isDev = process.env.NODE_ENV === "development";
 const defaultUrl = isDev ? apiDev : apiOp;
 
-const myFetch = async <T>(input: RequestInfo | URL, init?: RequestInit) => {
+type MyFetchType = {
+  path: RequestInfo | URL;
+  init?: RequestInit;
+  isClient?: boolean;
+};
+
+const myFetch = async <T>({ path, init, isClient }: MyFetchType) => {
   try {
-    const endPoint = `${defaultUrl}/${input}`;
+    const endPoint = isClient ? `/franchise/${path}` : `${defaultUrl}/${path}`;
+    console.log("[Request]", endPoint);
     const response = await fetch(endPoint, init);
     const data: T = await response.json();
     if (!response.ok) {
-      console.error(endPoint, data);
+      console.error("[ERROR]", endPoint);
       throw new Error("API 응답 처리 실패");
     }
     return data;
@@ -19,18 +26,3 @@ const myFetch = async <T>(input: RequestInfo | URL, init?: RequestInit) => {
 };
 
 export default myFetch;
-
-export const clientFetch = async <T>(input: RequestInfo | URL, init?: RequestInit) => {
-  const endPoint = `/franchise/${input}`;
-  try {
-    const response = await fetch(endPoint, init);
-    const data: T = await response.json();
-    if (!response.ok) {
-      console.error(endPoint, data);
-      throw new Error("API 응답 처리 실패");
-    }
-    return data;
-  } catch (error) {
-    throw error;
-  }
-};

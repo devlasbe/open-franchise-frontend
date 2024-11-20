@@ -1,5 +1,3 @@
-"use client";
-
 import { StatisticService } from "@/services/statistic";
 import BrandHeader from "../BrandHeader";
 import BrandStartup from "./BrandStartup";
@@ -8,28 +6,27 @@ import FetchBoundary from "@/components/errorBoundary/FetchBoundary";
 import BrandHead from "./BrandHead";
 import { BrandService } from "@/services/brand";
 import BrandInterior from "./BrandInterior";
-import { useEffect, useState } from "react";
-import { GetBrandRes, Statistic } from "@/types/apiTypes";
-import { useParams } from "next/navigation";
 
-export default function BrandPage() {
+type BrandPageParams = {
+  params: {
+    name: string;
+  };
+};
+
+export default function BrandPage({ params: { name } }: BrandPageParams) {
   return (
     <FetchBoundary>
-      <Layout />
+      <Layout name={name} />
     </FetchBoundary>
   );
 }
-const Layout = () => {
-  const { name } = useParams<{ name: string }>();
-  const [brandResponse, setBrandResponse] = useState<GetBrandRes>();
-  const [statisticDataList, setStatisticDataList] = useState<Statistic[]>();
+const Layout = async ({ name }: { name: string }) => {
+  console.log(name);
+  const brandResponse = await BrandService.getBrand(name);
+  const statisticDataList = (await StatisticService.getStatistic(name)).payload;
   const headData = brandResponse?.payload?.head;
   const brandData = statisticDataList?.length ? statisticDataList[0] : null;
-  useEffect(() => {
-    if (!name) return;
-    BrandService.getBrand(name).then((res) => setBrandResponse(res));
-    StatisticService.getStatistic(name).then((res) => setStatisticDataList(res.payload));
-  }, [name]);
+
   return (
     <div className="flex-1">
       <div className="flex flex-col flex-1 gap-4 pt-12">

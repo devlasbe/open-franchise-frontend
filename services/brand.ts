@@ -1,14 +1,14 @@
-import { clientFetch } from "@/lib/myFetch";
+import myFetch from "@/lib/myFetch";
 import { GetBrandListReq, GetBrandListRes, GetBrandRes } from "@/types/apiTypes";
 import { QueryParamsUtil } from "@/utils/queryParams";
 
 export class BrandService {
   static async getBrandList(params: GetBrandListReq) {
-    const data = await clientFetch<GetBrandListRes>(QueryParamsUtil.convert("brand", params));
+    const data = await myFetch<GetBrandListRes>({ path: QueryParamsUtil.convert("brand", params), isClient: true });
     return data;
   }
   static async getBrand(name: string) {
-    const data = await clientFetch<GetBrandRes>(`brand/${name}`);
+    const data = await myFetch<GetBrandRes>({ path: `brand/${name}` });
     return data;
   }
 }

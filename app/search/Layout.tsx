@@ -92,7 +92,7 @@ export default function Layout() {
             <Link key={`search-${item.brandNm}`} className="hovered-button" href={`/brand/${item.brandNm}`}>
               <Card className="flex flex-col gap-3 p-4">
                 <div className="flex flex-col gap-1">
-                  <p className="text-caption1 text-neutral-400 text-ellipsis line-clamp-1">{item.majrGdsNm}</p>
+                  <p className="text-caption1 text-neutral-400 text-ellipsis line-clamp-1">{item.majrGdsNm ?? "-"}</p>
                   <p className="text-subtitle3 sm:text-subtitle1 text-ellipsis line-clamp-1">{item.brandNm}</p>
                 </div>
                 <Separator className="border-t" />

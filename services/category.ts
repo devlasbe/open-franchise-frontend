@@ -3,7 +3,7 @@ import { GetCategoryListRes } from "@/types/apiTypes";
 
 export class CategoryService {
   static async getCategoryList() {
-    const dataList = await myFetch<GetCategoryListRes>("category");
+    const dataList = await myFetch<GetCategoryListRes>({ path: "category" });
     return dataList;
   }
 }
