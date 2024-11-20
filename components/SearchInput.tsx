@@ -28,8 +28,8 @@ export default function SearchInput() {
     router.push(path);
     closeDialog();
   };
-  const debouncedChange = useMemo(() => _.debounce(handleChange, 500), []);
-  const handleBlur = () => setTimeout(() => setIsFocus(false), 100);
+  const debouncedChange = useMemo(() => _.debounce(handleChange, 300), []);
+  const handleBlur = () => setTimeout(() => setIsFocus(false), 300);
 
   return (
     <div

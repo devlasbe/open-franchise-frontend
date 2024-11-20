@@ -21,14 +21,16 @@ export default function Layout() {
 
   const name = searchParams.get("name") ?? "";
   const category = searchParams.get("category") ?? "";
+  const [query, setQuery] = useState({ name: name, category: category });
+  useEffect(() => setQuery({ name, category }), [category, name]);
 
   // 초기 호출
   useEffect(() => {
     window.scrollTo(0, 0);
     setIsLoading(true);
     BrandService.getBrandList({
-      name,
-      category,
+      name: query.name,
+      category: query.category,
       pageNo,
       pageSize: 20,
     })
@@ -38,14 +40,14 @@ export default function Layout() {
       })
       .finally(() => setIsLoading(false));
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [query]);
 
   const getNextPage = useCallback(() => {
     if (isEnd) return;
     setIsLoading(true);
     BrandService.getBrandList({
-      name,
-      category,
+      name: query.name,
+      category: query.category,
       pageNo: pageNo + 1,
       pageSize: 20,
     })
@@ -55,7 +57,7 @@ export default function Layout() {
       })
       .finally(() => setIsLoading(false));
     setPageNo(pageNo + 1);
-  }, [category, isEnd, name, pageNo]);
+  }, [isEnd, pageNo, query.category, query.name]);
 
   const handleObserver = useCallback(
     (entries: IntersectionObserverEntry[]) => {
