@@ -11,7 +11,9 @@ export default function Home() {
           <p className="text-subtitle3 sm:text-h3">가맹정보부터 매출액까지 무료로 확인하세요</p>
         </div>
         <div className="sm:max-w-[600px] w-full bg-white shadow-md rounded-full">
-          <SearchInput />
+          <FetchBoundary>
+            <SearchInput />
+          </FetchBoundary>
         </div>
       </div>
       <FetchBoundary>
