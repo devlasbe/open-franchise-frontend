@@ -11,15 +11,15 @@ export class UnitUtil {
 
     const mNum = this.formatKtoM(number);
 
-    const billion = Math.floor(mNum / 10000);
+    const billion = mNum / 10000;
     const million = mNum % 10000;
 
-    if (cut === "b") return `${billion.toLocaleString()}억`;
+    if (cut === "b") return `${billion.toFixed(1).toLocaleString()}억`;
     if (cut === "m") return `${million.toLocaleString()}만`;
 
     let result = "";
-    if (billion > 0) {
-      result += `${billion.toLocaleString()}억 `;
+    if (+billion.toFixed(0) > 0) {
+      result += `${billion.toFixed(0).toLocaleString()}억 `;
     }
     if (million > 0 || billion === 0) {
       result += `${million.toLocaleString()}만`;
