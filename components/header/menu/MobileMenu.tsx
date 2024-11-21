@@ -14,7 +14,7 @@ import SearchInput from "@/components/SearchInput";
 export default function MobileMenu({ categoryList }: { categoryList: Category[] }) {
   const largeList = Array.from(new Set(categoryList.map((item) => item.indutyLclasNm)));
   return (
-    <nav className="flex gap-4 sm:hidden items-center">
+    <nav className="flex gap-4 md:hidden items-center">
       <AlertDialog>
         <AlertDialogTrigger asChild>
           <SearchIcon width={25} height={25} />

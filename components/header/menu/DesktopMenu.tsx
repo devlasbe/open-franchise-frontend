@@ -12,7 +12,7 @@ import { Category } from "@/types/apiTypes";
 export default function DesktopMenu({ categoryList }: { categoryList: Category[] }) {
   const largeList = Array.from(new Set(categoryList.map((item) => item.indutyLclasNm)));
   return (
-    <NavigationMenu className="hidden sm:flex flex-1 justify-between max-w-full">
+    <NavigationMenu className="hidden md:flex flex-1 justify-between max-w-full">
       <div className="flex">
         {largeList.map((item) => {
           const subList = categoryList
