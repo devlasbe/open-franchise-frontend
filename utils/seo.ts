@@ -29,7 +29,7 @@ export class SeoUtil {
       verification: {
         google: "ZPNpftzoxEaYPKk9dP9Co5egjaRkY31C1Nic2QpmzRc",
         other: {
-          "naver-site-verification": "d289ee083c0216feece23786d715bda15f079de2",
+          "naver-site-verification": "6dbb41bb68d95b0fe1420aeb5c58072eacd2116c",
         },
       },
     };
