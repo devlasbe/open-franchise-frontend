@@ -8,11 +8,14 @@ export class UnitUtil {
     if (isNaN(number) || number < 0) {
       return "유효한 숫자가 아닙니다.";
     }
+
     const mNum = this.formatKtoM(number);
-    if (cut === "b") return `${(mNum / 10000).toFixed(0)}억`;
-    if (cut === "m") return `${mNum.toFixed(0)}만`;
-    const billion = Math.floor(mNum / 10000); // 억 단위
-    const million = mNum % 10000; // 남은 만 단위
+
+    const billion = Math.floor(mNum / 10000);
+    const million = mNum % 10000;
+
+    if (cut === "b") return `${billion.toLocaleString()}억`;
+    if (cut === "m") return `${million.toLocaleString()}만`;
 
     let result = "";
     if (billion > 0) {
