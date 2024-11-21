@@ -21,6 +21,7 @@ export async function generateMetadata({ params: { name } }: BrandPageParams) {
     const metadata = SeoUtil.metadata(`${brand?.brandNm} - ${head.jnghdqrtrsConmNm}`, true);
     return metadata;
   } catch (error) {
+    console.error(error);
     return SeoUtil.metadata();
   }
 }
