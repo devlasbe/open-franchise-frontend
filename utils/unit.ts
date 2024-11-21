@@ -13,17 +13,18 @@ export class UnitUtil {
 
     const billion = mNum / 10000;
     const million = mNum % 10000;
-
+    console.log(million, million.toLocaleString());
     if (cut === "b") return `${billion.toFixed(1).toLocaleString()}억`;
     if (cut === "m") return `${million.toLocaleString()}만`;
-
+    console.log(billion, +billion.toFixed(0));
     let result = "";
-    if (+billion.toFixed(0) > 0) {
+    if (Math.floor(billion) > 0) {
       result += `${billion.toFixed(0).toLocaleString()}억 `;
     }
-    if (million > 0 || billion === 0) {
+    if (million > 0) {
       result += `${million.toLocaleString()}만`;
     }
+    if (!result) result = "0";
     return result.trim();
   }
 }
