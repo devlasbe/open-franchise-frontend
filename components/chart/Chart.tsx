@@ -13,6 +13,7 @@ import { Bar, BarChart, CartesianGrid, Line, LineChart, XAxis, YAxis } from "rec
 import getChartColor from "./getChartColor";
 
 export type ChartColorProps = "0" | "1" | "2" | "3" | "4";
+export type ChartYAxisFormatProps = "b" | "m";
 export type ChartTypeProps = "bar" | "line";
 
 type ConfigType = {
@@ -27,10 +28,10 @@ type ChartProps = {
   dataList?: unknown[];
   config: ConfigType;
   xAxis: string;
-  isBillion?: boolean;
+  yAxiosFormat?: ChartYAxisFormatProps;
 };
 
-export default function Chart({ type, dataList = [], config, xAxis, isBillion }: ChartProps) {
+export default function Chart({ type, dataList = [], config, xAxis, yAxiosFormat }: ChartProps) {
   const ChartElementList = useCallback(() => {
     return Object.keys(config).map((key, idx) => {
       const color = config[key].color;
@@ -55,7 +56,7 @@ export default function Chart({ type, dataList = [], config, xAxis, isBillion }:
         <XAxis dataKey={xAxis} tickLine={false} axisLine={false} tickMargin={8} padding={{ left: 24, right: 24 }} />
         <YAxis
           tickFormatter={(value) =>
-            isBillion ? UnitUtil.formatNumberToKorean(value, true) : (+value).toLocaleString()
+            yAxiosFormat ? UnitUtil.formatNumberToKorean(value, yAxiosFormat) : (+value).toLocaleString()
           }
         />
         <ChartTooltip
@@ -63,7 +64,7 @@ export default function Chart({ type, dataList = [], config, xAxis, isBillion }:
             <ChartTooltipContent
               labelClassName="px-2"
               formatter={(value) => [
-                isBillion ? UnitUtil.formatNumberToKorean(value as number) : (+value).toLocaleString(),
+                yAxiosFormat ? UnitUtil.formatNumberToKorean(value as number) : (+value).toLocaleString(),
               ]}
             />
           }
@@ -71,7 +72,7 @@ export default function Chart({ type, dataList = [], config, xAxis, isBillion }:
         <ChartLegend content={<ChartLegendContent />} />
       </>
     );
-  }, [isBillion, xAxis]);
+  }, [yAxiosFormat, xAxis]);
 
   return (
     <ChartContainer config={config} className="w-[110%] sm:w-full ml-[-20px] lg:ml-0">

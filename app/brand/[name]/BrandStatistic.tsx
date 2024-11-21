@@ -1,4 +1,4 @@
-import Chart, { ChartColorProps, ChartTypeProps } from "@/components/chart/Chart";
+import Chart, { ChartColorProps, ChartTypeProps, ChartYAxisFormatProps } from "@/components/chart/Chart";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import Summary from "@/components/ui/summary";
 import { Statistic } from "@/types/apiTypes";
@@ -23,7 +23,7 @@ export default function BrandStatistic({ statisticDataList }: { statisticDataLis
                     type={obj.chart.type}
                     dataList={statisticDataList}
                     xAxis={obj.chart.xAxis}
-                    isBillion={obj.chart.isBillion}
+                    yAxiosFormat={obj.chart.yAxisFormat}
                     config={{
                       [key]: {
                         label: obj.label,
@@ -43,7 +43,7 @@ export default function BrandStatistic({ statisticDataList }: { statisticDataLis
                       {statisticDataList.map((item) => {
                         return (
                           <Summary.Content key={`brand-statistic-cell-${obj.title}-${item.yr}`}>
-                            {obj.chart.isBillion
+                            {obj.chart.yAxisFormat
                               ? UnitUtil.formatNumberToKorean(+item[key as keyof Statistic])
                               : (+item[key as keyof Statistic]).toLocaleString()}
                             {obj.unit}
@@ -71,7 +71,7 @@ type LineList = {
       type?: ChartTypeProps;
       xAxis: string;
       color: ChartColorProps;
-      isBillion?: boolean;
+      yAxisFormat?: ChartYAxisFormatProps;
     };
   };
 };
@@ -87,13 +87,13 @@ const statisticLayoutList: StatisticLayoutListType[] = [
         title: "📋 평균매출",
         label: "평균매출",
         unit: "원",
-        chart: { type: "bar", xAxis: "yr", color: "0", isBillion: true },
+        chart: { type: "bar", xAxis: "yr", color: "0", yAxisFormat: "b" },
       },
       arUnitAvrgSlsAmt: {
         title: "📐 면적(평)당 평균매출",
         label: "면적(평)당 평균매출",
         unit: "원",
-        chart: { type: "bar", xAxis: "yr", color: "0" },
+        chart: { type: "bar", xAxis: "yr", color: "0", yAxisFormat: "m" },
       },
     },
   },

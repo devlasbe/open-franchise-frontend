@@ -4,12 +4,13 @@ export class UnitUtil {
     return Math.floor(number / 10);
   }
   // DB 숫자 1000단위
-  static formatNumberToKorean(number: number, cutBillion?: boolean) {
+  static formatNumberToKorean(number: number, cut?: "b" | "m") {
     if (isNaN(number) || number < 0) {
       return "유효한 숫자가 아닙니다.";
     }
     const mNum = this.formatKtoM(number);
-    if (cutBillion) return `${(mNum / 10000).toFixed(1)}억`;
+    if (cut === "b") return `${(mNum / 10000).toFixed(0)}억`;
+    if (cut === "m") return `${mNum}만`;
     const billion = Math.floor(mNum / 10000); // 억 단위
     const million = mNum % 10000; // 남은 만 단위
 
