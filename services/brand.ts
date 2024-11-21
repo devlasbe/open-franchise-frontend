@@ -3,8 +3,11 @@ import { GetBrandListReq, GetBrandListRes, GetBrandRes } from "@/types/apiTypes"
 import { QueryParamsUtil } from "@/utils/queryParams";
 
 export class BrandService {
-  static async getBrandList(params: GetBrandListReq) {
-    const data = await myFetch<GetBrandListRes>({ path: QueryParamsUtil.convert("brand", params), isClient: true });
+  static async getBrandList(params: GetBrandListReq, isServer?: boolean) {
+    const data = await myFetch<GetBrandListRes>({
+      path: QueryParamsUtil.convert("brand", params),
+      isClient: !isServer,
+    });
     return data;
   }
   static async getBrand(name: string) {
