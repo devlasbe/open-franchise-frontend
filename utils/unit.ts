@@ -16,7 +16,6 @@ export class UnitUtil {
     console.log(million, million.toLocaleString());
     if (cut === "b") return `${billion.toFixed(1).toLocaleString()}억`;
     if (cut === "m") return `${million.toLocaleString()}만`;
-    console.log(billion, +billion.toFixed(0));
     let result = "";
     if (Math.floor(billion) > 0) {
       result += `${billion.toFixed(0).toLocaleString()}억 `;
