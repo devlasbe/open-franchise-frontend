@@ -18,7 +18,7 @@ export async function generateMetadata({ params: { name } }: BrandPageParams) {
   try {
     const brandResponse = await BrandService.getBrand(name);
     const { brand, head } = brandResponse?.payload;
-    const metadata = SeoUtil.metadata(`${brand?.brandNm} - ${head.jnghdqrtrsConmNm}`);
+    const metadata = SeoUtil.metadata(`${brand?.brandNm} - ${head.jnghdqrtrsConmNm}`, true);
     return metadata;
   } catch (error) {
     return SeoUtil.metadata();
