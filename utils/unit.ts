@@ -10,7 +10,7 @@ export class UnitUtil {
     }
     const mNum = this.formatKtoM(number);
     if (cut === "b") return `${(mNum / 10000).toFixed(0)}억`;
-    if (cut === "m") return `${mNum}만`;
+    if (cut === "m") return `${mNum.toFixed(0)}만`;
     const billion = Math.floor(mNum / 10000); // 억 단위
     const million = mNum % 10000; // 남은 만 단위
 
