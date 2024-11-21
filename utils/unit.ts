@@ -13,7 +13,6 @@ export class UnitUtil {
 
     const billion = mNum / 10000;
     const million = mNum % 10000;
-    console.log(million, million.toLocaleString());
     if (cut === "b") return `${billion.toFixed(1).toLocaleString()}억`;
     if (cut === "m") return `${million.toLocaleString()}만`;
     let result = "";
