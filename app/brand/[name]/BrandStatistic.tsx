@@ -93,7 +93,7 @@ const statisticLayoutList: StatisticLayoutListType[] = [
         title: "📐 면적(평)당 평균매출",
         label: "면적(평)당 평균매출",
         unit: "원",
-        chart: { type: "bar", xAxis: "yr", color: "0", isBillion: true },
+        chart: { type: "bar", xAxis: "yr", color: "0" },
       },
     },
   },
