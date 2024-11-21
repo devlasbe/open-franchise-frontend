@@ -6,12 +6,24 @@ import FetchBoundary from "@/components/errorBoundary/FetchBoundary";
 import BrandHead from "./BrandHead";
 import { BrandService } from "@/services/brand";
 import BrandInterior from "./BrandInterior";
+import { SeoUtil } from "@/utils/seo";
 
 type BrandPageParams = {
   params: {
     name: string;
   };
 };
+
+export async function generateMetadata({ params: { name } }: BrandPageParams) {
+  try {
+    const brandResponse = await BrandService.getBrand(name);
+    const { brand, head } = brandResponse?.payload;
+    const metadata = SeoUtil.metadata(`${brand?.brandNm} - ${head.jnghdqrtrsConmNm}`);
+    return metadata;
+  } catch (error) {
+    return SeoUtil.metadata();
+  }
+}
 
 export default function BrandPage({ params: { name } }: BrandPageParams) {
   return (
@@ -21,7 +33,6 @@ export default function BrandPage({ params: { name } }: BrandPageParams) {
   );
 }
 const Layout = async ({ name }: { name: string }) => {
-  console.log(name);
   const brandResponse = await BrandService.getBrand(name);
   const statisticDataList = (await StatisticService.getStatistic(name)).payload;
   const headData = brandResponse?.payload?.head;
