@@ -3,7 +3,6 @@ import { NextResponse } from "next/server";
 
 type Route = {
   url: string;
-  lastModified: string;
   priority: string;
 };
 
@@ -15,8 +14,8 @@ const fetchRoutes = async (): Promise<Route[]> => {
   const baseUrl = process.env.NEXT_PUBLIC_DOMAIN;
 
   const staticRoutes: Route[] = [
-    { url: `${baseUrl}/`, lastModified: formatDate(new Date()), priority: "1" },
-    { url: `${baseUrl}/search`, lastModified: formatDate(new Date()), priority: "0.9" },
+    { url: `${baseUrl}/`, priority: "1" },
+    { url: `${baseUrl}/search`, priority: "0.9" },
   ];
 
   const brandRoute: Route[] = [];
@@ -27,7 +26,6 @@ const fetchRoutes = async (): Promise<Route[]> => {
     dataList.forEach((item) =>
       brandRoute.push({
         url: `${baseUrl}/brand/${item.brandNm}`,
-        lastModified: formatDate(new Date()),
         priority: "0.8",
       })
     );
@@ -51,10 +49,10 @@ const generateSitemap = (routes: Route[]) => {
     <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
       ${routes
         .map(
-          ({ url, lastModified, priority }) => `
+          ({ url, priority }) => `
         <url>
           <loc>${escapeXml(url)}</loc>
-          <lastmod>${lastModified}</lastmod>
+          <lastmod>${formatDate(new Date())}</lastmod>
           <priority>${priority}</priority>
           <changefreq>weekly</changefreq>
         </url>

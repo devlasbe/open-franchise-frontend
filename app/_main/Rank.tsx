@@ -15,10 +15,10 @@ export default async function Rank({ category, title }: RankProps) {
     category,
     pageNo: 1,
     pageSize: 10,
-    yr: "2023",
-    orderCol: "arUnitAvrgSlsAmt",
+    orderCol: "frcsCnt",
     orderSort: "desc",
   });
+
   return (
     <div className="space-y-4">
       <h3 className="text-h3">{title}</h3>
@@ -37,18 +37,12 @@ export default async function Rank({ category, title }: RankProps) {
                         </p>
                         <p className="text-subtitle2 overflow-hidden whitespace-nowrap text-ellipsis">{item.brandNm}</p>
                         <Separator className="my-2" />
-                        <div className="flex justify-between">
-                          <p className="text-caption1 text-neutral-400">면적(평)당 매출</p>
-                          <p className="text-caption1 text-neutral-700">
-                            {UnitUtil.formatNumberToKorean(item.arUnitAvrgSlsAmt)}원
-                          </p>
-                        </div>
-                        <div className="flex justify-between">
-                          <p className="text-caption1 text-neutral-400">평균 매출</p>
-                          <p className="text-caption1 text-neutral-700">
-                            {UnitUtil.formatNumberToKorean(item.avrgSlsAmt)}원
-                          </p>
-                        </div>
+                        <Value label="점포수" value={item.frcsCnt.toLocaleString() + "개"} />
+                        <Value
+                          label="창업금액"
+                          value={UnitUtil.formatNumberToKorean(item?.startup?.smtnAmt ?? 0) + "원"}
+                        />
+                        <Value label="평균매출" value={UnitUtil.formatNumberToKorean(item.avrgSlsAmt) + "원"} />
                       </Link>
                     </Card>
                   </div>
@@ -62,3 +56,12 @@ export default async function Rank({ category, title }: RankProps) {
     </div>
   );
 }
+
+const Value = ({ label, value }: { label: string; value: string }) => {
+  return (
+    <div className="flex justify-between">
+      <p className="text-caption1 text-neutral-400">{label}</p>
+      <p className="text-caption1 text-neutral-700">{value}</p>
+    </div>
+  );
+};

@@ -26,6 +26,9 @@ export default function Home() {
         <Rank category="커피" title="☕️ 카페 TOP10" />
       </FetchBoundary>
       <FetchBoundary>
+        <Rank category="아이스크림/빙수" title="🍦 아이스크림 TOP10" />
+      </FetchBoundary>
+      <FetchBoundary>
         <Rank category="주점" title="🍺 주점 TOP10" />
       </FetchBoundary>
       <FetchBoundary>

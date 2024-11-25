@@ -27,6 +27,7 @@
     "react-error-boundary": "^4.1.2",
     "recharts": "^2.13.3",
     "tailwind-merge": "^2.5.4",
+    "tailwind-scrollbar-hide": "^1.1.7",
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {

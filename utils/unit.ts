@@ -4,9 +4,9 @@ export class UnitUtil {
     return Math.floor(number / 10);
   }
   // DB 숫자 1000단위
-  static formatNumberToKorean(number: number, cut?: "b" | "m") {
-    if (isNaN(number) || number < 0) {
-      return "유효한 숫자가 아닙니다.";
+  static formatNumberToKorean(number?: number, cut?: "b" | "m") {
+    if (!number || number < 0) {
+      return "-";
     }
 
     const mNum = this.formatKtoM(number);

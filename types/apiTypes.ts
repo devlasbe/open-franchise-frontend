@@ -9,6 +9,56 @@
  * ---------------------------------------------------------------
  */
 
+export interface Brand {
+  /** 브랜드관리번호 */
+  brandMnno: string;
+  /** 가맹본부관리번호 */
+  jnghdqrtrsMnno: string;
+  /** 사업자등록번호 */
+  brno: string;
+  /** 법인등록번호 */
+  crno: string;
+  /** 가맹본부대표자명 */
+  jnghdqrtrsRprsvNm: string;
+  /** 브랜드명 */
+  brandNm: string;
+  /** 업종대분류명 */
+  indutyLclasNm: string;
+  /** 업종중분류명 */
+  indutyMlsfcNm: string;
+  /** 주요상품명 */
+  majrGdsNm: string;
+  /** 가맹사업개시일자 */
+  jngBizStrtDate: string;
+  /** 가맹사업기준년도 */
+  jngBizCrtraYr: string;
+  /** 가맹 사업 현황 */
+  statistics: string[];
+}
+
+export interface Startup {
+  /** 브랜드명 */
+  brandNm: string;
+  /** 법인명 */
+  corpNm: string;
+  /** 기준년도 */
+  yr: string;
+  /** 업종대분류명 */
+  indutyLclasNm: string;
+  /** 업종중분류명 */
+  indutyMlsfcNm: string;
+  /** 가맹금액 */
+  jngBzmnJngAmt: number;
+  /** 교육금액 */
+  jngBzmnEduAmt: number;
+  /** 기타금액 */
+  jngBzmnEtcAmt: number;
+  /** 보증금액 */
+  jngBzmnAssrncAmt: number;
+  /** 합계금액 */
+  smtnAmt: number;
+}
+
 export interface Statistic {
   /** 브랜드명 */
   brandNm: string;
@@ -34,6 +84,10 @@ export interface Statistic {
   avrgSlsAmt: number;
   /** 면적단위평균매출금액 */
   arUnitAvrgSlsAmt: number;
+  /** 브랜드 정보 */
+  brand: Brand | null;
+  /** 창업금액 */
+  startup: Startup | null;
 }
 
 export interface GetStatisticListRes {
@@ -64,15 +118,15 @@ export interface GetStatisticByFilterReq {
    */
   orderSort?: string;
   /**
-   * 연도
-   * @example "2023"
+   * 브랜드명
+   * @example "씨유(CU)"
    */
-  yr: string;
+  name?: string;
   /**
    * 카테고리
    * @example "치킨"
    */
-  category: string;
+  category?: string;
 }
 
 export interface Category {
@@ -116,31 +170,6 @@ export interface GetBrandListReq {
   name?: string;
   /** 카테고리 */
   category?: string;
-}
-
-export interface Brand {
-  /** 브랜드관리번호 */
-  brandMnno: string;
-  /** 가맹본부관리번호 */
-  jnghdqrtrsMnno: string;
-  /** 사업자등록번호 */
-  brno: string;
-  /** 법인등록번호 */
-  crno: string;
-  /** 가맹본부대표자명 */
-  jnghdqrtrsRprsvNm: string;
-  /** 브랜드명 */
-  brandNm: string;
-  /** 업종대분류명 */
-  indutyLclasNm: string;
-  /** 업종중분류명 */
-  indutyMlsfcNm: string;
-  /** 주요상품명 */
-  majrGdsNm: string;
-  /** 가맹사업개시일자 */
-  jngBizStrtDate: string;
-  /** 가맹사업기준년도 */
-  jngBizCrtraYr: string;
 }
 
 export interface GetBrandListRes {
@@ -210,8 +239,6 @@ export interface GetBrandRes {
 }
 
 export interface GetHeadReq {
-  /** 가맹사업기준년도 */
-  jngBizCrtraYr: string;
   /** 가맹본부관리번호 */
   jnghdqrtrsMnno: string;
 }
@@ -221,29 +248,6 @@ export interface GetHeadRes {
   payload: Head;
   /** 호출된 URI */
   request: string;
-}
-
-export interface Startup {
-  /** 브랜드명 */
-  brandNm: string;
-  /** 법인명 */
-  corpNm: string;
-  /** 기준년도 */
-  yr: string;
-  /** 업종대분류명 */
-  indutyLclasNm: string;
-  /** 업종중분류명 */
-  indutyMlsfcNm: string;
-  /** 가맹금액 */
-  jngBzmnJngAmt: number;
-  /** 교육금액 */
-  jngBzmnEduAmt: number;
-  /** 기타금액 */
-  jngBzmnEtcAmt: number;
-  /** 보증금액 */
-  jngBzmnAssrncAmt: number;
-  /** 합계금액 */
-  smtnAmt: number;
 }
 
 export interface GetStartupRes {
