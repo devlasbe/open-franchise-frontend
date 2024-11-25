@@ -41,11 +41,12 @@ export default function BrandStatistic({ statisticDataList }: { statisticDataLis
                     </Summary.Wrapper>
                     <Summary.Wrapper>
                       {statisticDataList.map((item) => {
+                        const value = item![key as keyof Statistic];
                         return (
                           <Summary.Content key={`brand-statistic-cell-${obj.title}-${item.yr}`}>
-                            {obj.chart.yAxisFormat
-                              ? UnitUtil.formatNumberToKorean(+item[key as keyof Statistic])
-                              : (+item[key as keyof Statistic]).toLocaleString()}
+                            {!!item && obj.chart.yAxisFormat
+                              ? UnitUtil.formatNumberToKorean(+(value as string))
+                              : (+(value as string)).toLocaleString()}
                             {obj.unit}
                           </Summary.Content>
                         );

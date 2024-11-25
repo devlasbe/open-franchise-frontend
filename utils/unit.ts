@@ -4,7 +4,7 @@ export class UnitUtil {
     return Math.floor(number / 10);
   }
   // DB 숫자 1000단위
-  static formatNumberToKorean(number?: number, cut?: "b" | "m") {
+  static formatNumberToKorean(number?: number | null, cut?: "b" | "m") {
     if (!number || number < 0) {
       return "-";
     }
