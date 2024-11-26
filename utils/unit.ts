@@ -5,7 +5,7 @@ export class UnitUtil {
   }
   // DB 숫자 1000단위
   static formatNumberToKorean(number?: number | null, cut?: "b" | "m") {
-    if (!number || number < 0) {
+    if (number === null || number === undefined) {
       return "-";
     }
 
@@ -13,11 +13,11 @@ export class UnitUtil {
 
     const billion = mNum / 10000;
     const million = mNum % 10000;
-    if (cut === "b") return `${billion.toFixed(1).toLocaleString()}억`;
+    if (cut === "b") return `${Math.floor(billion * 10) / 10}억`;
     if (cut === "m") return `${million.toLocaleString()}만`;
     let result = "";
     if (Math.floor(billion) > 0) {
-      result += `${billion.toFixed(0).toLocaleString()}억 `;
+      result += `${Math.floor(billion).toLocaleString()}억 `;
     }
     if (million > 0) {
       result += `${million.toLocaleString()}만`;

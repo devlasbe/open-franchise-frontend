@@ -55,7 +55,9 @@ export default function Chart({ type, dataList = [], config, xAxis, yAxiosFormat
         <CartesianGrid vertical={false} />
         <XAxis dataKey={xAxis} tickLine={false} axisLine={false} tickMargin={8} padding={{ left: 24, right: 24 }} />
         <YAxis
-          tickFormatter={(value) => (yAxiosFormat ? UnitUtil.formatNumberToKorean(value) : (+value).toLocaleString())}
+          tickFormatter={(value) =>
+            yAxiosFormat ? UnitUtil.formatNumberToKorean(value, yAxiosFormat) : (+value).toLocaleString()
+          }
         />
         <ChartTooltip
           content={
