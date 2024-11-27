@@ -20,11 +20,14 @@ jobs:
       - name: Install Playwright Browsers
         run: pnpm exec playwright install --with-deps
 
-      - name: Run Playwright tests
-        run: pnpm test:e2e
+      - name: Start Dev Server
+        run: pnpm dev
         env:
           NODE_ENV: production
           NEXT_PUBLIC_API_URL_OP: ${{secrets.NEXT_PUBLIC_API_URL_OP}}
+
+      - name: Run Playwright tests
+        run: pnpm test:e2e
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
