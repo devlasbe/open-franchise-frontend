@@ -1,5 +1,5 @@
 import SearchInput from "@/components/SearchInput";
-import Rank from "./_main/Rank";
+import Rank from "../components/Rank";
 import FetchBoundary from "@/components/errorBoundary/FetchBoundary";
 
 export default function Home() {
