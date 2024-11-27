@@ -23,6 +23,7 @@ jobs:
       - name: Run Playwright tests
         run: pnpm test:e2e
         env:
+          NODE_ENV: production
           NEXT_PUBLIC_API_URL_OP: ${{secrets.NEXT_PUBLIC_API_URL_OP}}
 
       - uses: actions/upload-artifact@v4
