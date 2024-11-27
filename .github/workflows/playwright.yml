@@ -8,26 +8,33 @@ jobs:
   test:
     timeout-minutes: 60
     runs-on: ubuntu-latest
+    env:
+      DOCKER_IMAGE_TAG: lasbe/test:latest
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
 
+      - name: Build the Dockerfile
+        run: docker build -t ${{ env.DOCKER_IMAGE_TAG }} --build-arg="NEXT_PUBLIC_API_URL_OP=${{ secrets.NEXT_PUBLIC_API_URL_OP }}" .
+
+      - name: Run Docker Container
+        run: docker run -d --name test -p 3000:3000 ${{ env.DOCKER_IMAGE_TAG }}
+
       - name: Install dependencies
         run: npm install -g pnpm && pnpm install
 
       - name: Install Playwright Browsers
-        run: pnpm exec playwright install --with-deps
-
-      - name: Start Dev Server
-        run: pnpm dev
-        env:
-          NODE_ENV: production
-          NEXT_PUBLIC_API_URL_OP: ${{secrets.NEXT_PUBLIC_API_URL_OP}}
+        run: pnpm playwright install chromium --with-deps
 
       - name: Run Playwright tests
         run: pnpm test:e2e
+
+      - name: Stop And Remove Docker Container
+        run: |
+          docker stop test
+          docker rm test
 
       - uses: actions/upload-artifact@v4
         if: ${{ !cancelled() }}
