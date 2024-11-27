@@ -10,6 +10,8 @@ FROM base AS deps
 
 FROM base AS builder
   WORKDIR /app
+  ARG NEXT_PUBLIC_API_URL_OP
+  ENV NEXT_PUBLIC_API_URL_OP=$NEXT_PUBLIC_API_URL_OP
   COPY --from=deps /app/node_modules ./node_modules
   COPY . .
   RUN corepack enable pnpm
@@ -18,8 +20,6 @@ FROM base AS builder
 FROM base AS runner
   WORKDIR /app
   
-  ARG NEXT_PUBLIC_API_URL_OP
-  ENV NEXT_PUBLIC_API_URL_OP=$NEXT_PUBLIC_API_URL_OP
   ENV NODE_ENV=production
 
   RUN addgroup --system --gid 1001 nodejs
