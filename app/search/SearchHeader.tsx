@@ -1,4 +1,5 @@
 import { Separator } from "@/components/ui/separator";
+import SubHeader from "@/components/ui/sub-header";
 import { SortType } from "@/types/sort";
 
 type SearchHeaderType = {
@@ -8,7 +9,7 @@ type SearchHeaderType = {
 
 export default function SearchHeader({ current, onChange }: SearchHeaderType) {
   return (
-    <div className="z-10 fixed top-16 left-0 flex justify-center items-center w-full h-12 px-4 sm:px-16 bg-white bg-opacity-50 backdrop-blur-sm border-t shadow-md">
+    <SubHeader>
       <div className="flex items-center gap-2 max-w-screen-xl w-full overflow-x-scroll scrollbar-hide">
         <SortButton isCurrent={!current?.orderCol} onClick={() => onChange({ orderCol: "", orderSort: "" })}>
           기본
@@ -24,7 +25,7 @@ export default function SearchHeader({ current, onChange }: SearchHeaderType) {
           </SortButton>
         ))}
       </div>
-    </div>
+    </SubHeader>
   );
 }
 
