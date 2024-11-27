@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "test:e2e": "playwright test",
+    "test:ui": "playwright test --ui",
     "swagger": "npx swagger-typescript-api -p http://localhost:3001/swagger-json -o ./types -n apiTypes.ts --no-client"
   },
   "dependencies": {
@@ -31,6 +33,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@playwright/test": "^1.49.0",
     "@svgr/webpack": "^8.1.0",
     "@types/lodash": "^4.17.13",
     "@types/node": "^20",

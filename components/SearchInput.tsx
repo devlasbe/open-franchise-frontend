@@ -33,6 +33,7 @@ export default function SearchInput() {
 
   return (
     <div
+      id="search"
       className="relative flex items-center px-4 py-2 h-[44px] border rounded-full group focus-within:border-neutral-400"
       onFocus={() => setIsFocus(true)}
       onBlur={handleBlur}

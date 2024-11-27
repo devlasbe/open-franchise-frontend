@@ -21,13 +21,15 @@ export default async function Rank({ category, title }: RankProps) {
 
   return (
     <div className="space-y-4">
-      <h3 className="text-h3">{title}</h3>
+      <h3 className="text-h3" id="rank-title">
+        {title}
+      </h3>
       <div className="px-16">
         <Carousel className="w-full">
           <CarouselContent>
             {!!chickenList?.payload.length &&
               chickenList.payload.map((item, idx) => (
-                <CarouselItem key={`main-chicken-${item.brandNm}`} className="md:basis-1/3 lg:basis-1/5">
+                <CarouselItem key={`main-chicken-${item.brandNm}`} id="rank-item" className="md:basis-1/3 lg:basis-1/5">
                   <div className="p-1">
                     <Card className="p-4 hovered-button">
                       <Link href={`/brand/${item.brandNm}`}>
