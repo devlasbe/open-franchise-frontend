@@ -26,7 +26,6 @@ export default function SearchLayout() {
   const [query, setQuery] = useState({ name: name, category: category });
   const [sort, setSort] = useState<SortType>({ orderCol: "", orderSort: "" });
   useEffect(() => setQuery({ name, category }), [category, name]);
-  console.log(sort);
   // 초기 호출
   useEffect(() => {
     window.scrollTo(0, 0);
