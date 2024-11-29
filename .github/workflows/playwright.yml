@@ -13,7 +13,6 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: lts/*
-          cache: "pnpm"
 
       - name: Build the Dockerfile
         run: docker build -t ${{ env.DOCKER_IMAGE_TAG }} --build-arg="NEXT_PUBLIC_API_URL_OP=${{ secrets.NEXT_PUBLIC_API_URL_OP }}" .
