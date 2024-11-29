@@ -20,6 +20,9 @@ jobs:
       - name: Run Docker Container
         run: docker run -d --name test -p 3000:3000 ${{ env.DOCKER_IMAGE_TAG }}
 
+      - name: Install Deps
+        run: npm i
+
       - name: Install Playwright Browsers
         run: npx playwright install chromium --with-deps
 
