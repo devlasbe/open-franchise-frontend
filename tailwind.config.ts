@@ -13,86 +13,16 @@ const config: Config = {
         noto: ["var(--noto)"],
       },
       fontSize: {
-        h1: [
-          "32px",
-          {
-            lineHeight: "44px",
-            letterSpacing: "-0.5px",
-            fontWeight: "700",
-          },
-        ],
-        h2: [
-          "28px",
-          {
-            lineHeight: "40px",
-            letterSpacing: "-0.5px",
-            fontWeight: "700",
-          },
-        ],
-        h3: [
-          "22px",
-          {
-            lineHeight: "34px",
-            letterSpacing: "-0.5px",
-            fontWeight: "700",
-          },
-        ],
-        subtitle1: [
-          "18px",
-          {
-            lineHeight: "26px",
-            letterSpacing: "-0.5px",
-            fontWeight: "700",
-          },
-        ],
-        subtitle2: [
-          "16px",
-          {
-            lineHeight: "24px",
-            letterSpacing: "-0.5px",
-            fontWeight: "700",
-          },
-        ],
-        subtitle3: [
-          "15px",
-          {
-            lineHeight: "23px",
-            letterSpacing: "-0.5px",
-            fontWeight: "700",
-          },
-        ],
-        body: [
-          "14px",
-          {
-            lineHeight: "20px",
-            letterSpacing: "-0.5px",
-            fontWeight: "700",
-          },
-        ],
-        caption1: [
-          "12px",
-          {
-            lineHeight: "18px",
-            letterSpacing: "-0.5px",
-            fontWeight: "700",
-          },
-        ],
-        caption2: [
-          "10px",
-          {
-            lineHeight: "15px",
-            letterSpacing: "-0.5px",
-            fontWeight: "700",
-          },
-        ],
-        textbody: [
-          "15px",
-          {
-            lineHeight: "26px",
-            letterSpacing: "-0.5px",
-            fontWeight: "700",
-          },
-        ],
+        h1: ["32px", { lineHeight: "44px", letterSpacing: "-0.5px", fontWeight: "700" }],
+        h2: ["28px", { lineHeight: "40px", letterSpacing: "-0.5px", fontWeight: "700" }],
+        h3: ["22px", { lineHeight: "34px", letterSpacing: "-0.5px", fontWeight: "700" }],
+        subtitle1: ["18px", { lineHeight: "26px", letterSpacing: "-0.5px", fontWeight: "700" }],
+        subtitle2: ["16px", { lineHeight: "24px", letterSpacing: "-0.5px", fontWeight: "700" }],
+        subtitle3: ["15px", { lineHeight: "23px", letterSpacing: "-0.5px", fontWeight: "700" }],
+        body: ["14px", { lineHeight: "20px", letterSpacing: "-0.5px", fontWeight: "700" }],
+        caption1: ["12px", { lineHeight: "18px", letterSpacing: "-0.5px", fontWeight: "700" }],
+        caption2: ["10px", { lineHeight: "15px", letterSpacing: "-0.5px", fontWeight: "700" }],
+        textbody: ["15px", { lineHeight: "26px", letterSpacing: "-0.5px", fontWeight: "700" }],
       },
       colors: {
         background: "hsl(var(--background))",
@@ -140,6 +70,28 @@ const config: Config = {
         lg: "var(--radius)",
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
+      },
+      keyframes: {
+        "accordion-down": {
+          from: {
+            height: "0",
+          },
+          to: {
+            height: "var(--radix-accordion-content-height)",
+          },
+        },
+        "accordion-up": {
+          from: {
+            height: "var(--radix-accordion-content-height)",
+          },
+          to: {
+            height: "0",
+          },
+        },
+      },
+      animation: {
+        "accordion-down": "accordion-down 0.2s ease-out",
+        "accordion-up": "accordion-up 0.2s ease-out",
       },
     },
   },

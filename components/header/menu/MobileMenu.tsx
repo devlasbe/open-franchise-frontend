@@ -1,12 +1,7 @@
 import { HamburgerMenuIcon } from "@radix-ui/react-icons";
-import {
-  AlertDialog,
-  AlertDialogCancel,
-  AlertDialogContent,
-  AlertDialogFooter,
-  AlertDialogTitle,
-  AlertDialogTrigger,
-} from "../../ui/alert-dialog";
+// prettier-ignore
+import { AlertDialog,AlertDialogCancel,AlertDialogContent,AlertDialogDescription,AlertDialogFooter,AlertDialogTitle,AlertDialogTrigger } from "../../ui/alert-dialog";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 import { Category } from "@/types/apiTypes";
 import { SearchIcon } from "lucide-react";
 import SearchInput from "@/components/SearchInput";
@@ -35,31 +30,32 @@ export default function MobileMenu({ categoryList }: { categoryList: Category[] 
           <HamburgerMenuIcon width={28} height={28} />
         </AlertDialogTrigger>
         <AlertDialogContent className="overflow-auto h-full border-none">
-          <AlertDialogTitle />
-          {largeList.map((item) => {
-            const subList = categoryList
-              .filter((data) => data.indutyLclasNm === item)
-              .sort((a, b) => a.indutyMlsfcNm.localeCompare(b.indutyMlsfcNm));
-            return (
-              <div key={`mobile-menu-${item}`} className="space-y-4">
-                <h2 className="font-extrabold text-center text-subtitle1 underline decoration-blue-700 decoration-wavy">
-                  {item}
-                </h2>
-                <div className="grid grid-cols-3 gap-1">
-                  {subList.map((sub) => (
-                    <AlertDialogCancel asChild key={`mobile-sub-menu-${sub.indutyMlsfcNm}`} className="m-0">
-                      <a
-                        href={`/search?category=${sub.indutyMlsfcNm}`}
-                        className="py-1 border rounded-md text-center text-caption1 sm:text-body text-ellipsis line-clamp-1"
-                      >
-                        {sub.indutyMlsfcNm}
-                      </a>
-                    </AlertDialogCancel>
-                  ))}
-                </div>
-              </div>
-            );
-          })}
+          <AlertDialogTitle>메뉴</AlertDialogTitle>
+          <AlertDialogDescription />
+          <Accordion type="single" collapsible>
+            {largeList.map((item) => {
+              const subList = categoryList
+                .filter((data) => data.indutyLclasNm === item)
+                .sort((a, b) => a.indutyMlsfcNm.localeCompare(b.indutyMlsfcNm));
+              return (
+                <AccordionItem key={`mobile-menu-${item}`} value={`item-${item}`}>
+                  <AccordionTrigger>{item}</AccordionTrigger>
+                  <AccordionContent className="grid grid-cols-2 gap-1">
+                    {subList.map((sub) => (
+                      <AlertDialogCancel asChild key={`mobile-sub-menu-${sub.indutyMlsfcNm}`} className="m-0">
+                        <a
+                          href={`/search?category=${sub.indutyMlsfcNm}`}
+                          className="py-1 border rounded-md text-center text-caption1 sm:text-body text-ellipsis line-clamp-1"
+                        >
+                          {sub.indutyMlsfcNm}
+                        </a>
+                      </AlertDialogCancel>
+                    ))}
+                  </AccordionContent>
+                </AccordionItem>
+              );
+            })}
+          </Accordion>
           <AlertDialogFooter>
             <AlertDialogCancel>닫기</AlertDialogCancel>
           </AlertDialogFooter>
