@@ -14,6 +14,13 @@ jobs:
         with:
           node-version: lts/*
 
+      - name: Wait Vercel Preview
+        uses: patrickedqvist/wait-for-vercel-preview@v1.3.1
+        id: waitFor200
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+          max_timeout: 180
+
       - name: Build the Dockerfile
         run: docker build -t ${{ env.DOCKER_IMAGE_TAG }} --build-arg="NEXT_PUBLIC_API_URL_OP=${{ secrets.NEXT_PUBLIC_API_URL_OP }}" .
 
@@ -22,14 +29,6 @@ jobs:
 
       - name: Install PNPM
         run: npm install -g pnpm
-
-      - name: Cache pnpm store
-        uses: actions/cache@v3
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
 
       - name: Install dependencies
         run: pnpm install
@@ -49,5 +48,5 @@ jobs:
         name: "Playwright Reporter"
         with:
           report-file: results.json
-          comment-title: "Playwright E2E Test Results"
+          comment-title: "🔎 테스트 결과"
           job-summary: true
