@@ -34,7 +34,7 @@ export default function Footer() {
         <a className="cursor-pointer hover:opacity-50" href="https://lasbe.tistory.com/" target="_blank">
           <Icons.Blog fill="#a3a3a3" width={20} height={20} />
         </a>
-        <a className="cursor-pointer hover:opacity-50" href="https://github.com/LasBe-code" target="_blank">
+        <a className="cursor-pointer hover:opacity-50" href="https://github.com/devlasbe" target="_blank">
           <GitHubLogoIcon color="#A3A3A3" width={20} height={20} />
         </a>
       </div>
