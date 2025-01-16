@@ -1,4 +1,4 @@
-name: Playwright Tests
+name: test
 on:
   pull_request:
     branches: main
@@ -20,22 +20,8 @@ jobs:
       - name: Run Docker Container
         run: docker run -d --name test -p 3000:3000 ${{ env.DOCKER_IMAGE_TAG }}
 
-      - name: Install PNPM
-        run: npm install -g pnpm
-
-      - name: Cache pnpm store
-        uses: actions/cache@v3
-        with:
-          path: ~/.pnpm-store
-          key: ${{ runner.os }}-pnpm-${{ hashFiles('**/pnpm-lock.yaml') }}
-          restore-keys: |
-            ${{ runner.os }}-pnpm-
-
       - name: Install dependencies
-        run: pnpm install
-
-      - name: Install Playwright Browsers
-        run: pnpm playwright install chromium --with-deps
+        run: npm i -g pnpm && pnpm i && pnpm playwright install chromium --with-deps
 
       - name: Run Playwright tests
         run: pnpm test:e2e
@@ -49,5 +35,5 @@ jobs:
         name: "Playwright Reporter"
         with:
           report-file: results.json
-          comment-title: "Playwright E2E Test Results"
+          comment-title: "🔎 테스트 결과"
           job-summary: true
