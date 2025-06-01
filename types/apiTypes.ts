@@ -1,5 +1,6 @@
 /* eslint-disable */
 /* tslint:disable */
+// @ts-nocheck
 /*
  * ---------------------------------------------------------------
  * ## THIS FILE WAS GENERATED VIA SWAGGER-TYPESCRIPT-API        ##
@@ -229,6 +230,8 @@ export interface BrandRes {
   brand: Brand;
   /** 본사 데이터 */
   head: Head;
+  /** 브랜드 차단 여부 */
+  isRejectedBrand: boolean;
 }
 
 export interface GetBrandRes {
