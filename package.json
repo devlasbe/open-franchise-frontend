@@ -9,7 +9,7 @@
     "lint": "next lint",
     "test:e2e": "playwright test",
     "test:ui": "playwright test --ui",
-    "swagger": "npx swagger-typescript-api -p http://localhost:3001/swagger-json -o ./types -n apiTypes.ts --no-client"
+    "swagger": "npx swagger-typescript-api generate -p http://localhost:3001/swagger-json -o ./types -n apiTypes.ts --no-client"
   },
   "dependencies": {
     "@radix-ui/react-accordion": "^1.2.1",
