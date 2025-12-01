@@ -9,19 +9,31 @@ type MyFetchType = {
   isClient?: boolean;
 };
 
-const myFetch = async <T>({ path, init, isClient }: MyFetchType) => {
+export class ApiError extends Error {
+  status: number;
+  
+  constructor(message: string, status: number) {
+    super(message);
+    this.status = status;
+    this.name = 'ApiError';
+  }
+}
+
+const fetchService = async <T>({ path, init, isClient }: MyFetchType) => {
   try {
     const endPoint = isClient ? `/franchise/${path}` : `${defaultUrl}/${path}`;
     const response = await fetch(endPoint, init);
-    const data: T = await response.json();
+    
     if (!response.ok) {
-      console.error('[ERROR]', endPoint);
-      throw new Error('API 응답 처리 실패');
+      console.error('[ERROR]', endPoint, response.status);
+      throw new ApiError('API 응답 처리 실패', response.status);
     }
+
+    const data: T = await response.json();
     return data;
   } catch (error) {
     throw error;
   }
 };
 
-export default myFetch;
+export default fetchService;

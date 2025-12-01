@@ -1,9 +1,9 @@
-import myFetch from '@/lib/myFetch';
-import { LoginRequestDto, LoginResponseDto, UserWithoutPassword } from '@/types/apiTypes';
+import fetchService from '@/lib/fetchService';
+import { GetProfileResponseDto, LoginRequestDto, LoginResponseDto } from '@/types/apiTypes';
 
 export class AuthService {
   static async login(credentials: LoginRequestDto) {
-    const data = await myFetch<LoginResponseDto>({
+    const data = await fetchService<LoginResponseDto>({
       path: 'auth/login',
       init: {
         method: 'POST',
@@ -18,20 +18,21 @@ export class AuthService {
     return data;
   }
 
-  static async getProfile() {
-    const response = await myFetch<UserWithoutPassword>({
+  static async getProfile(cookie?: string) {
+    const response = await fetchService<GetProfileResponseDto>({
       path: 'auth/profile',
       init: {
         method: 'GET',
         credentials: 'include',
+        headers: cookie ? { Cookie: cookie } : undefined,
       },
-      isClient: true,
+      isClient: !cookie,
     });
     return response;
   }
 
   static async logout() {
-    return await myFetch<{ message: string }>({
+    return await fetchService<{ message: string }>({
       path: 'auth/logout',
       init: {
         method: 'POST',
