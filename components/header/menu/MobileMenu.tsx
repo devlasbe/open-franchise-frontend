@@ -1,3 +1,5 @@
+'use client';
+
 import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 // prettier-ignore
 import { AlertDialog,AlertDialogCancel,AlertDialogContent,AlertDialogDescription,AlertDialogFooter,AlertDialogTitle,AlertDialogTrigger } from "../../ui/alert-dialog";
@@ -6,8 +8,10 @@ import { Category } from '@/types/apiTypes';
 import { SearchIcon } from 'lucide-react';
 import SearchInput from '@/components/SearchInput';
 import Link from 'next/link';
+import { useAuth } from '@/hooks/useAuth';
 
 export default function MobileMenu({ categoryList }: { categoryList: Category[] }) {
+  const { isLoggedIn, isAdmin } = useAuth();
   const largeList = Array.from(new Set(categoryList.map((item) => item.indutyLclasNm)));
   return (
     <nav className="flex gap-4 md:hidden items-center">
@@ -60,9 +64,22 @@ export default function MobileMenu({ categoryList }: { categoryList: Category[] 
 
           <AlertDialogFooter>
             <AlertDialogCancel>닫기</AlertDialogCancel>
-            <AlertDialogCancel>
-              <Link href="/login">로그인</Link>
-            </AlertDialogCancel>
+            {isLoggedIn ? (
+              <>
+                {isAdmin && (
+                  <AlertDialogCancel>
+                    <Link href="/admin">관리자</Link>
+                  </AlertDialogCancel>
+                )}
+                <AlertDialogCancel>
+                  <Link href="/mypage">마이페이지</Link>
+                </AlertDialogCancel>
+              </>
+            ) : (
+              <AlertDialogCancel>
+                <Link href="/login">로그인</Link>
+              </AlertDialogCancel>
+            )}
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

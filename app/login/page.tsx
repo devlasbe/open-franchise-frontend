@@ -20,12 +20,7 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      const response = await AuthService.login({ email, password });
-
-      // 토큰을 localStorage에 저장
-      if (response.accessToken) {
-        localStorage.setItem('accessToken', response.accessToken);
-      }
+      await AuthService.login({ email, password });
 
       // 로그인 성공 후 메인 페이지로 이동
       router.push('/');
