@@ -1,10 +1,11 @@
-import { HamburgerMenuIcon } from "@radix-ui/react-icons";
+import { HamburgerMenuIcon } from '@radix-ui/react-icons';
 // prettier-ignore
 import { AlertDialog,AlertDialogCancel,AlertDialogContent,AlertDialogDescription,AlertDialogFooter,AlertDialogTitle,AlertDialogTrigger } from "../../ui/alert-dialog";
-import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
-import { Category } from "@/types/apiTypes";
-import { SearchIcon } from "lucide-react";
-import SearchInput from "@/components/SearchInput";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from '@/components/ui/accordion';
+import { Category } from '@/types/apiTypes';
+import { SearchIcon } from 'lucide-react';
+import SearchInput from '@/components/SearchInput';
+import Link from 'next/link';
 
 export default function MobileMenu({ categoryList }: { categoryList: Category[] }) {
   const largeList = Array.from(new Set(categoryList.map((item) => item.indutyLclasNm)));
@@ -43,12 +44,12 @@ export default function MobileMenu({ categoryList }: { categoryList: Category[] 
                   <AccordionContent className="grid grid-cols-2 gap-1">
                     {subList.map((sub) => (
                       <AlertDialogCancel asChild key={`mobile-sub-menu-${sub.indutyMlsfcNm}`} className="m-0">
-                        <a
+                        <Link
                           href={`/search?category=${sub.indutyMlsfcNm}`}
                           className="py-1 border rounded-md text-center text-caption1 sm:text-body text-ellipsis line-clamp-1"
                         >
                           {sub.indutyMlsfcNm}
-                        </a>
+                        </Link>
                       </AlertDialogCancel>
                     ))}
                   </AccordionContent>
@@ -56,8 +57,12 @@ export default function MobileMenu({ categoryList }: { categoryList: Category[] 
               );
             })}
           </Accordion>
+
           <AlertDialogFooter>
             <AlertDialogCancel>닫기</AlertDialogCancel>
+            <AlertDialogCancel>
+              <Link href="/login">로그인</Link>
+            </AlertDialogCancel>
           </AlertDialogFooter>
         </AlertDialogContent>
       </AlertDialog>

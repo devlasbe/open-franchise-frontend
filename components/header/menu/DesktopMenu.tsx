@@ -1,13 +1,14 @@
-import SearchInput from "@/components/SearchInput";
-import { ListItem } from "@/components/ui/listItem";
+import SearchInput from '@/components/SearchInput';
+import { ListItem } from '@/components/ui/listItem';
 import {
   NavigationMenu,
   NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuList,
   NavigationMenuTrigger,
-} from "@/components/ui/navigation-menu";
-import { Category } from "@/types/apiTypes";
+} from '@/components/ui/navigation-menu';
+import { Category } from '@/types/apiTypes';
+import Link from 'next/link';
 
 export default function DesktopMenu({ categoryList }: { categoryList: Category[] }) {
   const largeList = Array.from(new Set(categoryList.map((item) => item.indutyLclasNm)));
@@ -38,7 +39,12 @@ export default function DesktopMenu({ categoryList }: { categoryList: Category[]
           );
         })}
       </div>
-      <SearchInput />
+      <div className="flex items-center gap-4">
+        <Link href="/login" className="text-gray-400 font-bold text-sm hover:underline">
+          로그인
+        </Link>
+        <SearchInput />
+      </div>
     </NavigationMenu>
   );
 }
