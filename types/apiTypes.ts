@@ -294,3 +294,63 @@ export interface GetInteriorRes {
   /** 호출된 URI */
   request: string;
 }
+
+export interface LoginRequestDto {
+  /** 이메일 */
+  email: string;
+  /** 비밀번호 */
+  password: string;
+}
+
+export interface LoginResponseDto {
+  /** JWT 액세스 토큰 */
+  accessToken: string;
+}
+
+export interface UserWithoutPassword {
+  /** 사용자 ID */
+  id: string;
+  /** 이메일 주소 */
+  email: string;
+  /** 사용자 이름 */
+  name: string;
+  /** 사용자 역할 */
+  role: "USER" | "ADMIN";
+  /**
+   * 생성 일시
+   * @format date-time
+   */
+  createdAt: string;
+}
+
+export interface FindUserByIdRes {
+  /** 응답 데이터 */
+  payload: UserWithoutPassword;
+  /** 호출된 URI */
+  request: string;
+}
+
+export interface FindUserAllRes {
+  /** 응답 데이터 */
+  payload: UserWithoutPassword[];
+  /** 호출된 URI */
+  request: string;
+  /** payload 배열의 length */
+  count: number;
+}
+
+export interface CreateUserReq {
+  /** 이메일 주소 */
+  email: string;
+  /** 비밀번호 */
+  password: string;
+  /** 사용자 이름 */
+  name: string;
+}
+
+export interface CreateUserRes {
+  /** 응답 데이터 */
+  payload: UserWithoutPassword;
+  /** 호출된 URI */
+  request: string;
+}
