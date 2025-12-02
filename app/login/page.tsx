@@ -1,14 +1,12 @@
 'use client';
 
 import { useState } from 'react';
-import { useRouter } from 'next/navigation';
 import { AuthService } from '@/services/auth';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import Link from 'next/link';
 
 export default function LoginPage() {
-  const router = useRouter();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -21,8 +19,6 @@ export default function LoginPage() {
 
     try {
       await AuthService.login({ email, password });
-
-      // 로그인 성공 후 강제 새로고침으로 헤더 상태 업데이트
       window.location.href = '/';
     } catch (err) {
       setError((err as Error).message ?? '로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
