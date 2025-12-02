@@ -294,3 +294,104 @@ export interface GetInteriorRes {
   /** 호출된 URI */
   request: string;
 }
+
+export interface UserWithoutPassword {
+  /** 사용자 ID */
+  id: string;
+  /** 이메일 주소 */
+  email: string;
+  /** 사용자 이름 */
+  name: string;
+  /** 사용자 역할 */
+  role: 'USER' | 'ADMIN';
+  /**
+   * 생성 일시
+   * @format date-time
+   */
+  createdAt: string;
+}
+
+export interface GetProfileResponseDto {
+  /** 응답 데이터 */
+  payload: UserWithoutPassword;
+  /** 호출된 URI */
+  request: string;
+}
+
+export interface LoginRequestDto {
+  /** 이메일 */
+  email: string;
+  /** 비밀번호 */
+  password: string;
+}
+
+export interface LoginRes {
+  /** 로그인 성공 메시지 */
+  message: string;
+}
+
+export interface LoginResponseDto {
+  /** 응답 데이터 */
+  payload: LoginRes;
+  /** 호출된 URI */
+  request: string;
+}
+
+export interface LogoutRes {
+  /** 로그아웃 성공 메시지 */
+  message: string;
+}
+
+export interface LogoutResponseDto {
+  /** 응답 데이터 */
+  payload: LogoutRes;
+  /** 호출된 URI */
+  request: string;
+}
+
+export interface FindUserByIdRes {
+  /** 응답 데이터 */
+  payload: UserWithoutPassword;
+  /** 호출된 URI */
+  request: string;
+}
+
+export interface FindUserAllRes {
+  /** 응답 데이터 */
+  payload: UserWithoutPassword[];
+  /** 호출된 URI */
+  request: string;
+  /** payload 배열의 length */
+  count: number;
+}
+
+export interface CreateUserReq {
+  /** 이메일 주소 */
+  email: string;
+  /** 비밀번호 */
+  password: string;
+  /** 사용자 이름 */
+  name: string;
+}
+
+export interface CreateUserRes {
+  /** 응답 데이터 */
+  payload: UserWithoutPassword;
+  /** 호출된 URI */
+  request: string;
+}
+
+export interface RejectedBrand {
+  /** 브랜드명 */
+  brandNm: string;
+}
+
+export interface GetRejectedBrandListRes {
+  payload: RejectedBrand[];
+  request: string;
+  count: number;
+}
+
+export interface AddRejectedBrandDto {
+  brandNm: string;
+}
