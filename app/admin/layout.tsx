@@ -1,22 +1,27 @@
-'use client';
+import { AuthService } from '@/services/auth';
+import { cookies } from 'next/headers';
+import { redirect } from 'next/navigation';
 
-import { useAuth } from '@/hooks/useAuth';
-import { useRouter } from 'next/navigation';
-import { useEffect } from 'react';
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const cookieStore = cookies();
+  const allCookies = cookieStore.getAll();
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
-  const { isAdmin, isLoading, isLoggedIn } = useAuth();
-  const router = useRouter();
+  if (allCookies.length === 0) {
+    redirect('/');
+  }
 
-  useEffect(() => {
-    if (!isLoading && (!isLoggedIn || !isAdmin)) {
-      router.replace('/');
-    }
-  }, [isAdmin, isLoading, isLoggedIn, router]);
+  let user;
 
-  if (isLoading || !isAdmin) return null;
+  try {
+    const response = await AuthService.getProfile();
+    user = response.payload;
+  } catch {
+    // 토큰 만료나 에러나면 user는 undefined
+  }
+
+  if (!user || user.role !== 'ADMIN') {
+    redirect('/');
+  }
 
   return <div className="container mx-auto py-10">{children}</div>;
 }
-
-

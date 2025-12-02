@@ -18,15 +18,13 @@ export class AuthService {
     return data;
   }
 
-  static async getProfile(cookie?: string) {
+  static async getProfile() {
     const response = await fetchService<GetProfileResponseDto>({
       path: 'auth/profile',
       init: {
         method: 'GET',
         credentials: 'include',
-        headers: cookie ? { Cookie: cookie } : undefined,
       },
-      isClient: !cookie,
     });
     return response;
   }

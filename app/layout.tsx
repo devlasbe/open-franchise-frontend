@@ -24,10 +24,9 @@ export default async function RootLayout({
   const cookieStore = cookies();
   const accessToken = cookieStore.get('accessToken')?.value;
   let user: UserWithoutPassword | null = null;
-
   if (accessToken) {
     try {
-      const userData = await AuthService.getProfile(`accessToken=${accessToken}`);
+      const userData = await AuthService.getProfile();
       user = userData.payload || userData;
     } catch {
       user = null;
