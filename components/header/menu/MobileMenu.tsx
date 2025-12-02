@@ -67,17 +67,17 @@ export default function MobileMenu({ categoryList }: { categoryList: Category[] 
             {isLoading ? null : isLoggedIn ? (
               <>
                 {isAdmin && (
-                  <AlertDialogCancel>
+                  <AlertDialogCancel asChild>
                     <Link href="/admin">관리자</Link>
                   </AlertDialogCancel>
                 )}
-                <AlertDialogCancel>
+                <AlertDialogCancel asChild>
                   <Link href="/mypage">마이페이지</Link>
                 </AlertDialogCancel>
                 <AlertDialogCancel onClick={logout}>로그아웃</AlertDialogCancel>
               </>
             ) : (
-              <AlertDialogCancel>
+              <AlertDialogCancel asChild>
                 <Link href="/login">로그인</Link>
               </AlertDialogCancel>
             )}
