@@ -11,7 +11,7 @@ import Link from 'next/link';
 import { useAuth } from '@/hooks/useAuth';
 
 export default function MobileMenu({ categoryList }: { categoryList: Category[] }) {
-  const { isLoggedIn, isAdmin } = useAuth();
+  const { isLoggedIn, isAdmin, isLoading, logout } = useAuth();
   const largeList = Array.from(new Set(categoryList.map((item) => item.indutyLclasNm)));
   return (
     <nav className="flex gap-4 md:hidden items-center">
@@ -64,7 +64,7 @@ export default function MobileMenu({ categoryList }: { categoryList: Category[] 
 
           <AlertDialogFooter>
             <AlertDialogCancel>닫기</AlertDialogCancel>
-            {isLoggedIn ? (
+            {isLoading ? null : isLoggedIn ? (
               <>
                 {isAdmin && (
                   <AlertDialogCancel>
@@ -74,6 +74,7 @@ export default function MobileMenu({ categoryList }: { categoryList: Category[] 
                 <AlertDialogCancel>
                   <Link href="/mypage">마이페이지</Link>
                 </AlertDialogCancel>
+                <AlertDialogCancel onClick={logout}>로그아웃</AlertDialogCancel>
               </>
             ) : (
               <AlertDialogCancel>

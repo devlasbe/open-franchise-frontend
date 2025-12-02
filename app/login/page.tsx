@@ -22,9 +22,8 @@ export default function LoginPage() {
     try {
       await AuthService.login({ email, password });
 
-      // 로그인 성공 후 메인 페이지로 이동
-      router.push('/');
-      router.refresh();
+      // 로그인 성공 후 강제 새로고침으로 헤더 상태 업데이트
+      window.location.href = '/';
     } catch (err) {
       setError((err as Error).message ?? '로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.');
     } finally {
