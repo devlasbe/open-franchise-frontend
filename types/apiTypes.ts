@@ -303,7 +303,7 @@ export interface UserWithoutPassword {
   /** 사용자 이름 */
   name: string;
   /** 사용자 역할 */
-  role: "USER" | "ADMIN";
+  role: 'USER' | 'ADMIN';
   /**
    * 생성 일시
    * @format date-time
@@ -379,4 +379,19 @@ export interface CreateUserRes {
   payload: UserWithoutPassword;
   /** 호출된 URI */
   request: string;
+}
+
+export interface RejectedBrand {
+  /** 브랜드명 */
+  brandNm: string;
+}
+
+export interface GetRejectedBrandListRes {
+  payload: RejectedBrand[];
+  request: string;
+  count: number;
+}
+
+export interface AddRejectedBrandDto {
+  brandNm: string;
 }
